@@ -597,6 +597,7 @@
     #program .chapter-grid {
       grid-template-columns: 1fr;
       gap: 90px;
+      margin-top: 96px;
     }
 
     #program .chapter {
@@ -607,51 +608,29 @@
     #program .chapter:nth-child(even) { margin-right: auto; }
     #program .chapter:nth-child(odd) { margin-left: auto; }
 
-    .chapter-grid .chapter .num {
-      position: relative;
-      overflow: visible;
-      width: 72px;
-      height: 62px;
-      display: grid;
-      place-items: center;
-      padding: 0 0 18px;
-      background: #141413;
-      border-radius: 8px;
-      color: #ffffff;
-      font-size: 26px;
-      line-height: 1;
-      margin: 14px 0 12px;
+    /* weeks fade in properly on scroll */
+    @media (prefers-reduced-motion: no-preference) {
+      #program .chapter[data-reveal] {
+        opacity: 0;
+        transform: translateY(36px);
+        transition: opacity 650ms ease, transform 650ms cubic-bezier(0.22, 1, 0.36, 1);
+        transition-delay: var(--reveal-delay, 0ms);
+      }
+
+      #program .chapter[data-reveal].is-visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
-    /* roof */
-    .chapter-grid .chapter .num::before {
-      content: "";
-      position: absolute;
-      top: -17px;
-      left: 50%;
-      transform: translateX(-50%);
-      border-left: 44px solid transparent;
-      border-right: 44px solid transparent;
-      border-bottom: 19px solid #141413;
+    @keyframes clawdBackflip {
+      0% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-34px) rotate(-180deg); }
+      100% { transform: translateY(0) rotate(-360deg); }
     }
 
-    /* door */
-    .chapter-grid .chapter .num::after {
-      content: "";
-      position: absolute;
-      bottom: 0;
-      left: 50%;
-      margin-left: -9px;
-      width: 18px;
-      height: 22px;
-      background: var(--amethyst);
-      border-radius: 9px 9px 0 0;
-      transform-origin: left bottom;
-      transition: transform 0.35s ease;
-    }
-
-    .chapter.door-open .num::after {
-      transform: perspective(80px) rotateY(-72deg);
+    .week-rider.backflip .rider-bob {
+      animation: clawdBackflip 0.8s cubic-bezier(0.34, 1.3, 0.45, 1);
     }
 
     .week-rider {
@@ -4193,6 +4172,8 @@
     var pathLength = 0;
     var cardZones = [];
     var lastX = 0;
+    var lastInsideIndex = -1;
+    var flipping = false;
 
     function curveTo(from, to) {
       var midY = (from.y + to.y) / 2;
@@ -4244,17 +4225,25 @@
         rider.classList.toggle('flip', point.x < lastX);
         lastX = point.x;
       }
-      var inside = false;
-      chapters.forEach(function(ch, i) {
+      var insideIndex = -1;
+      for (var i = 0; i < cardZones.length; i++) {
         var zone = cardZones[i];
-        var nearDoor = Math.abs(point.x - zone.x) < 140 &&
-          (Math.abs(point.y - zone.top.y) < 90 || Math.abs(point.y - zone.bottom.y) < 90);
-        ch.classList.toggle('door-open', nearDoor);
         if (point.y > zone.top.y + 12 && point.y < zone.bottom.y - 12 && Math.abs(point.x - zone.x) < 60) {
-          inside = true;
+          insideIndex = i;
+          break;
         }
-      });
-      rider.classList.toggle('inside', inside);
+      }
+      // backflip when he comes out the bottom of week 3
+      if (lastInsideIndex === 2 && insideIndex === -1 && point.y >= cardZones[2].bottom.y - 12 && !flipping) {
+        flipping = true;
+        rider.classList.add('backflip');
+        setTimeout(function() {
+          rider.classList.remove('backflip');
+          flipping = false;
+        }, 820);
+      }
+      lastInsideIndex = insideIndex;
+      rider.classList.toggle('inside', insideIndex !== -1);
     }
 
     buildPath();
