@@ -1,0 +1,2598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Claude Code Marketing MBA | The AI Solopreneur</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --white: #ffffff;
+      --bright: #eeeeee;
+      --medium: #d8d8d8;
+      --muted: #a3a3a3;
+      --graphite: #3f3f3f;
+      --surface: #1e1e1e;
+      --surface-2: #232323;
+      --abyss: #171717;
+      --amethyst: #7c3aed;
+      --amethyst-hover: #6d28d9;
+      --lavender: #a78bfa;
+      --tag-bg: rgba(138, 92, 245, 0.15);
+      --tag-bg-strong: rgba(138, 92, 245, 0.22);
+
+      --inset: rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;
+      --inset-strong: rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset;
+      --glow: 0 0 60px rgba(124, 58, 237, 0.25);
+
+      --font: 'Poppins', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, sans-serif;
+      --max-width: 1120px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font);
+      background: var(--abyss);
+      color: var(--bright);
+      font-size: 16px;
+      line-height: 1.5;
+      letter-spacing: -0.32px;
+      font-weight: 400;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .container-narrow {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .accent { color: var(--lavender); }
+    a { color: var(--lavender); }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      max-width: calc(100vw - 48px);
+      background: transparent;
+      color: var(--medium);
+      font-size: 13px;
+      font-weight: 500;
+      line-height: 1.35;
+      padding: 6px 14px;
+      border-radius: 9999px;
+      letter-spacing: -0.13px;
+      box-shadow: var(--inset-strong);
+      text-align: center;
+    }
+
+    .tag .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--lavender);
+      flex-shrink: 0;
+    }
+
+    .tag .tag-text {
+      min-width: 0;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .btn {
+      display: inline-block;
+      font-family: var(--font);
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: -0.36px;
+      padding: 18px 32px;
+      border-radius: 10px;
+      text-decoration: none;
+      transition: all 0.15s ease;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn-primary {
+      background: var(--amethyst);
+      color: var(--white);
+      box-shadow: var(--inset-strong);
+    }
+
+    .btn-primary:hover { background: var(--amethyst-hover); }
+
+    .btn-large {
+      padding: 20px 36px;
+      font-size: 20px;
+      letter-spacing: -0.4px;
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--medium);
+      box-shadow: var(--inset);
+      padding: 14px 22px;
+    }
+
+    .btn-ghost:hover {
+      color: var(--bright);
+      box-shadow: var(--inset-strong);
+    }
+
+    .btn-meta {
+      display: block;
+      margin-top: 14px;
+      font-size: 13px;
+      color: var(--muted);
+      letter-spacing: -0.13px;
+    }
+
+    section {
+      padding: 56px 0;
+      background: var(--abyss);
+      position: relative;
+      overflow: hidden;
+    }
+
+    section.tight { padding: 24px 0; }
+    section + section { padding-top: 0; }
+    section.tight + section { padding-top: 0; }
+    section + section.tight { padding-top: 0; }
+
+    .price-section::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 900px;
+      height: 700px;
+      background: radial-gradient(ellipse at center, rgba(124, 58, 237, 0.14) 0%, transparent 60%);
+      pointer-events: none;
+      z-index: 0;
+      filter: blur(50px);
+    }
+
+    .price-section > .container { position: relative; z-index: 1; }
+
+    .story::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      right: -300px;
+      width: 700px;
+      height: 700px;
+      background: radial-gradient(circle, rgba(167, 139, 250, 0.06) 0%, transparent 60%);
+      pointer-events: none;
+      z-index: 0;
+      filter: blur(60px);
+    }
+
+    .story > .container-narrow { position: relative; z-index: 1; }
+
+    .guarantee::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -200px;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(124, 58, 237, 0.08) 0%, transparent 60%);
+      pointer-events: none;
+      z-index: 0;
+      filter: blur(60px);
+    }
+
+    .guarantee > .container-narrow { position: relative; z-index: 1; }
+
+    .skills::before {
+      content: "";
+      position: absolute;
+      bottom: -100px;
+      right: -150px;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(167, 139, 250, 0.06) 0%, transparent 60%);
+      pointer-events: none;
+      z-index: 0;
+      filter: blur(50px);
+    }
+
+    .skills > .container { position: relative; z-index: 1; }
+
+    .outcome-section { padding-bottom: 16px; }
+
+    .bonus-section { padding: 0 0 16px; }
+
+    .skills.bonus-section .head {
+      text-align: left;
+      margin-bottom: 28px;
+    }
+
+    .skills.bonus-section .heading-lg {
+      max-width: 760px;
+      font-size: clamp(28px, 3vw, 36px);
+    }
+
+    .skills.bonus-section .head .intro {
+      max-width: 720px;
+      margin: 0;
+      text-align: left;
+    }
+
+    .mentor-section { padding-top: 20px; }
+
+    .mentor-section .heading-lg {
+      max-width: 820px;
+      margin-bottom: 30px;
+    }
+
+    .orientation-section {
+      padding-top: 4px;
+    }
+
+    .orientation-section .copy {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    .hero {
+      padding: 120px 24px 44px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      top: -380px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 1200px;
+      height: 1000px;
+      background: radial-gradient(ellipse at center, rgba(124, 58, 237, 0.32) 0%, rgba(124, 58, 237, 0.12) 35%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+      filter: blur(40px);
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      top: 30%;
+      left: -150px;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(167, 139, 250, 0.12) 0%, transparent 60%);
+      pointer-events: none;
+      z-index: 0;
+      filter: blur(60px);
+    }
+
+    .hero-inner {
+      max-width: 920px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero .tag { margin-bottom: 28px; }
+
+    .hero h1 {
+      font-size: clamp(44px, 7vw, 72px);
+      font-weight: 700;
+      line-height: 1.02;
+      letter-spacing: -1.6px;
+      color: var(--bright);
+      margin-bottom: 24px;
+    }
+
+    .hero .lede {
+      font-size: 21px;
+      line-height: 1.55;
+      letter-spacing: -0.42px;
+      color: var(--medium);
+      max-width: 820px;
+      margin: 0 auto 30px;
+    }
+
+    .hero .lede strong {
+      color: var(--bright);
+      font-weight: 600;
+    }
+
+    .stats-row {
+      max-width: 920px;
+      margin: 46px auto 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+    }
+
+    .stats-group {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .stats-caption {
+      text-align: center;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin: 0;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0;
+      border-top: 1px solid var(--graphite);
+      border-bottom: 1px solid var(--graphite);
+      margin: 0;
+    }
+
+    .stats .stat {
+      padding: 24px 12px;
+      text-align: center;
+      border-right: 1px solid var(--graphite);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .stats .stat:last-child { border-right: none; }
+
+    .stats .stat .num {
+      font-size: 30px;
+      font-weight: 700;
+      letter-spacing: -0.6px;
+      color: var(--bright);
+      line-height: 1;
+    }
+
+    .stats .stat .num.accent { color: var(--lavender); }
+
+    .stats .stat .label {
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 500;
+      line-height: 1.2;
+    }
+
+    .copy {
+      font-size: 18px;
+      line-height: 1.7;
+      letter-spacing: -0.36px;
+      color: var(--medium);
+    }
+
+    .copy p { margin-bottom: 28px; }
+
+    .copy strong {
+      color: var(--bright);
+      font-weight: 500;
+    }
+
+    .copy em {
+      font-style: italic;
+      color: var(--medium);
+      font-weight: 400;
+    }
+
+    .copy .lead {
+      font-size: 22px;
+      line-height: 1.5;
+      letter-spacing: -0.44px;
+      color: var(--bright);
+      font-weight: 500;
+      margin-bottom: 28px;
+    }
+
+    .copy .center-line {
+      text-align: center;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .display {
+      font-size: clamp(40px, 5.5vw, 56px);
+      font-weight: 700;
+      line-height: 1.05;
+      letter-spacing: -1.2px;
+      color: var(--bright);
+    }
+
+    .heading-lg {
+      font-size: clamp(32px, 4.5vw, 44px);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.88px;
+      color: var(--bright);
+    }
+
+    .gradient-text {
+      display: inline-block;
+      color: transparent;
+      background: linear-gradient(90deg, var(--bright) 0%, var(--lavender) 48%, var(--amethyst) 100%);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .center { text-align: center; }
+
+    .moment {
+      font-size: clamp(28px, 4vw, 36px);
+      font-weight: 600;
+      line-height: 1.2;
+      letter-spacing: -0.72px;
+      color: var(--bright);
+      text-align: center;
+      margin: 56px 0;
+    }
+
+    .pull {
+      max-width: 720px;
+      margin: 32px auto;
+      padding: 32px;
+      background: var(--surface);
+      border-radius: 12px;
+      border-left: 3px solid var(--lavender);
+      box-shadow: var(--inset);
+      font-size: 22px;
+      line-height: 1.45;
+      letter-spacing: -0.44px;
+      color: var(--bright);
+      font-weight: 500;
+    }
+
+    .proof-card {
+      max-width: 720px;
+      margin: 48px auto;
+      padding: 32px;
+      background: var(--surface);
+      border-radius: 12px;
+      box-shadow: var(--inset-strong);
+      border-left: 3px solid var(--lavender);
+    }
+
+    .proof-card.story-proof {
+      margin: 38px 0 0;
+    }
+
+    .proof-card .proof-title {
+      color: var(--bright);
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: -0.36px;
+      margin-bottom: 20px;
+    }
+
+    .proof-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      border-top: 1px solid var(--graphite);
+      border-bottom: 1px solid var(--graphite);
+    }
+
+    .proof-item {
+      padding: 22px 14px;
+      text-align: center;
+      border-right: 1px solid var(--graphite);
+    }
+
+    .proof-item:last-child { border-right: none; }
+
+    .proof-item .num {
+      display: block;
+      color: var(--bright);
+      font-size: 30px;
+      line-height: 1.05;
+      font-weight: 700;
+      letter-spacing: -0.6px;
+      margin-bottom: 6px;
+    }
+
+    .proof-item .label {
+      display: block;
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.2;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .inside .head,
+    .skills .head,
+    .wall .head,
+    .included .head {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+
+    .inside h2,
+    .skills .head h2,
+    .wall .head h2,
+    .included .head h2 {
+      margin-bottom: 16px;
+    }
+
+    .inside .intro,
+    .skills .head .intro,
+    .wall .head .intro,
+    .included .head .intro {
+      font-size: 17px;
+      color: var(--medium);
+      max-width: 620px;
+      margin: 0 auto;
+      letter-spacing: -0.34px;
+    }
+
+    .chapter-grid {
+      display: grid;
+      gap: 16px;
+    }
+
+    .chapter {
+      background: var(--surface);
+      border-radius: 12px;
+      padding: 32px;
+      box-shadow: var(--inset);
+      display: grid;
+      grid-template-columns: 80px 1fr;
+      gap: 24px;
+      transition: box-shadow 0.2s;
+    }
+
+    .chapter:hover { box-shadow: var(--inset-strong); }
+
+    .chapter .num {
+      font-size: 36px;
+      font-weight: 600;
+      line-height: 1;
+      color: var(--muted);
+      letter-spacing: -0.72px;
+    }
+
+    .chapter h3 {
+      font-size: 22px;
+      font-weight: 600;
+      line-height: 1.25;
+      letter-spacing: -0.44px;
+      color: var(--bright);
+      margin-bottom: 18px;
+    }
+
+    .chapter ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .chapter li {
+      position: relative;
+      padding: 6px 0 6px 24px;
+      color: var(--medium);
+      font-size: 15px;
+      line-height: 1.55;
+      letter-spacing: -0.3px;
+    }
+
+    .chapter li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 17px;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--muted);
+    }
+
+    .source-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      padding: 0;
+      margin: 32px 0;
+    }
+
+    .included.tight .source-list { margin-top: 8px; }
+
+    .source-list li {
+      position: relative;
+      background: var(--surface);
+      border-radius: 12px;
+      box-shadow: var(--inset);
+      padding: 20px 24px 20px 56px;
+      color: var(--medium);
+      font-size: 15px;
+      line-height: 1.55;
+      letter-spacing: -0.3px;
+    }
+
+    .source-list li::before {
+      content: "\2713";
+      position: absolute;
+      left: 22px;
+      top: 18px;
+      color: var(--lavender);
+      font-weight: 700;
+    }
+
+    .source-list strong {
+      display: block;
+      color: var(--bright);
+      font-size: 17px;
+      line-height: 1.35;
+      font-weight: 600;
+      letter-spacing: -0.34px;
+      margin-bottom: 5px;
+    }
+
+    .cost-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin: 32px 0;
+    }
+
+    .cost-card {
+      background: var(--surface);
+      border-radius: 12px;
+      box-shadow: var(--inset);
+      padding: 24px;
+    }
+
+    .cost-card .role {
+      color: var(--bright);
+      font-size: 18px;
+      line-height: 1.25;
+      font-weight: 600;
+      letter-spacing: -0.36px;
+      margin-bottom: 10px;
+    }
+
+    .cost-card .job {
+      color: var(--medium);
+      font-size: 14px;
+      line-height: 1.5;
+      letter-spacing: -0.28px;
+      margin-bottom: 18px;
+    }
+
+    .cost-card .cost {
+      color: var(--lavender);
+      font-size: 16px;
+      line-height: 1.2;
+      font-weight: 700;
+      letter-spacing: -0.32px;
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .skill {
+      background: var(--surface);
+      border-radius: 12px;
+      padding: 20px 22px;
+      box-shadow: var(--inset);
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      transition: box-shadow 0.15s;
+    }
+
+    .skill:hover { box-shadow: var(--inset-strong); }
+
+    .skill .check {
+      flex-shrink: 0;
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: rgba(124, 58, 237, 0.08);
+      color: var(--lavender);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: var(--inset);
+      margin-top: 2px;
+    }
+
+    .skill .check svg {
+      width: 16px;
+      height: 16px;
+      stroke: var(--lavender);
+      stroke-width: 1.75;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .skill .name {
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: -0.3px;
+      color: var(--bright);
+      margin-bottom: 3px;
+    }
+
+    .skill .desc {
+      font-size: 14px;
+      line-height: 1.45;
+      letter-spacing: -0.28px;
+      color: var(--muted);
+    }
+
+    .price-section { text-align: center; }
+    .price-section h2 { margin-bottom: 20px; }
+
+    .price-box {
+      max-width: 480px;
+      margin: 48px auto 0;
+      background: var(--surface);
+      border-radius: 12px;
+      padding: 44px 32px;
+      box-shadow: var(--inset-strong);
+      position: relative;
+    }
+
+    .price-box .price-tag {
+      display: inline-block;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      margin-bottom: 16px;
+      text-transform: uppercase;
+    }
+
+    .price-box .price {
+      font-size: 72px;
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: -1.8px;
+      color: var(--bright);
+      margin-bottom: 8px;
+    }
+
+    .price-box .price-note {
+      font-size: 14px;
+      color: var(--muted);
+      letter-spacing: -0.28px;
+      margin-bottom: 28px;
+    }
+
+    .guarantee h2 { margin-bottom: 28px; }
+
+    .faq h2 { margin-bottom: 36px; }
+
+    .faq-list {
+      max-width: 720px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .faq-item {
+      background: var(--surface);
+      border-radius: 12px;
+      box-shadow: var(--inset);
+      overflow: hidden;
+    }
+
+    .faq-q {
+      padding: 22px 26px;
+      font-size: 16px;
+      font-weight: 600;
+      letter-spacing: -0.32px;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      user-select: none;
+      color: var(--bright);
+    }
+
+    .faq-q .toggle {
+      font-size: 20px;
+      color: var(--lavender);
+      transition: transform 0.25s;
+      flex-shrink: 0;
+      margin-left: 16px;
+      font-weight: 500;
+    }
+
+    .faq-q .toggle::before {
+      content: "+";
+    }
+
+    .faq-item.open .faq-q .toggle { transform: rotate(45deg); }
+
+    .faq-a {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s ease;
+    }
+
+    .faq-a-inner {
+      padding: 0 26px 22px;
+      font-size: 15px;
+      line-height: 1.6;
+      letter-spacing: -0.3px;
+      color: var(--medium);
+    }
+
+    .cta-inline {
+      text-align: center;
+      padding: 36px 0 8px;
+    }
+
+    .divider {
+      max-width: 200px;
+      margin: 0 auto;
+      border: none;
+      border-top: 1px solid var(--graphite);
+    }
+
+    .wall-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .wall-card {
+      background: var(--surface);
+      border-radius: 12px;
+      padding: 24px;
+      box-shadow: var(--inset);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .wall-card .stars {
+      color: #facc15;
+      font-size: 14px;
+      letter-spacing: 1px;
+    }
+
+    .wall-card blockquote {
+      font-size: 15px;
+      line-height: 1.55;
+      letter-spacing: -0.3px;
+      color: var(--bright);
+      flex-grow: 1;
+    }
+
+    .wall-card blockquote strong {
+      color: var(--lavender);
+      font-weight: 600;
+    }
+
+    .wall-card .w-attr {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding-top: 14px;
+      border-top: 1px solid var(--graphite);
+    }
+
+    .wall-card .w-avatar,
+    .t-avatar {
+      position: relative;
+      border-radius: 50%;
+      background: var(--tag-bg);
+      color: var(--lavender);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      box-shadow: var(--inset-strong);
+      flex-shrink: 0;
+      overflow: hidden;
+    }
+
+    .wall-card .w-avatar {
+      width: 36px;
+      height: 36px;
+      font-size: 14px;
+    }
+
+    .wall-card .w-avatar img,
+    .t-avatar img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+
+    .wall-card .w-name {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--bright);
+      letter-spacing: -0.28px;
+      line-height: 1.2;
+    }
+
+    .wall-card .w-role {
+      font-size: 12px;
+      color: var(--muted);
+      letter-spacing: -0.24px;
+      line-height: 1.2;
+      margin-top: 2px;
+    }
+
+    .ole-portrait {
+      display: block;
+      width: min(44vw, 320px);
+      aspect-ratio: 1;
+      margin: 0 auto 44px;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: center 28%;
+      box-shadow: var(--inset-strong);
+    }
+
+    .t-quote {
+      max-width: 680px;
+      margin: 44px auto;
+      padding: 30px 32px 24px;
+      background: var(--surface);
+      border-radius: 12px;
+      box-shadow: var(--inset);
+      position: relative;
+    }
+
+    .t-quote.featured {
+      max-width: 760px;
+      padding: 32px 34px 26px;
+    }
+
+    .t-quote::before {
+      content: "\201C";
+      position: absolute;
+      top: 8px;
+      left: 24px;
+      font-size: 54px;
+      line-height: 1;
+      color: var(--lavender);
+      font-weight: 700;
+      opacity: 0.5;
+      font-family: Georgia, serif;
+    }
+
+    .t-quote blockquote {
+      font-size: 18px;
+      line-height: 1.5;
+      letter-spacing: -0.38px;
+      color: var(--bright);
+      font-weight: 500;
+      padding-top: 16px;
+      margin-bottom: 22px;
+    }
+
+    .t-quote.featured blockquote {
+      font-size: 19px;
+      line-height: 1.5;
+      letter-spacing: -0.38px;
+    }
+
+    .t-quote blockquote strong {
+      color: var(--lavender);
+      font-weight: 600;
+    }
+
+    .featured-proof-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+      max-width: 1000px;
+      margin: 0 auto 36px;
+    }
+
+    .featured-proof-grid .t-quote,
+    .featured-proof-grid .t-quote.featured {
+      max-width: none;
+      margin: 0;
+      padding: 26px 26px 22px;
+      height: 100%;
+    }
+
+    .featured-proof-grid .t-quote::before {
+      top: 10px;
+      left: 22px;
+      font-size: 44px;
+    }
+
+    .featured-proof-grid .t-quote blockquote,
+    .featured-proof-grid .t-quote.featured blockquote {
+      font-size: 16px;
+      line-height: 1.55;
+      letter-spacing: -0.32px;
+      margin-bottom: 18px;
+    }
+
+    .t-attr {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding-top: 18px;
+      border-top: 1px solid var(--graphite);
+    }
+
+    .t-avatar {
+      width: 44px;
+      height: 44px;
+      font-size: 16px;
+      letter-spacing: 0;
+    }
+
+    .t-name {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--bright);
+      letter-spacing: -0.3px;
+      line-height: 1.2;
+    }
+
+    .t-role {
+      font-size: 13px;
+      color: var(--muted);
+      letter-spacing: -0.26px;
+      line-height: 1.2;
+      margin-top: 2px;
+    }
+
+    .video-card {
+      max-width: 760px;
+      margin: 44px auto;
+      background: var(--surface);
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: var(--inset-strong);
+    }
+
+    .video-card video {
+      display: block;
+      width: 100%;
+      background: #000;
+      aspect-ratio: 16 / 9;
+    }
+
+    .video-card .v-attr {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 18px 24px;
+      border-top: 1px solid var(--graphite);
+    }
+
+    .video-card .v-avatar {
+      position: relative;
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      background: var(--tag-bg);
+      color: var(--lavender);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      box-shadow: var(--inset-strong);
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .video-card .v-avatar img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .video-card .v-name {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--bright);
+      letter-spacing: -0.34px;
+      line-height: 1.2;
+    }
+
+    .video-card .v-role {
+      font-size: 13px;
+      color: var(--muted);
+      letter-spacing: -0.28px;
+      line-height: 1.2;
+      margin-top: 4px;
+    }
+
+    footer {
+      background: var(--abyss);
+      color: var(--muted);
+      padding: 64px 0 48px;
+      text-align: center;
+      font-size: 13px;
+      letter-spacing: -0.26px;
+      border-top: 1px solid var(--graphite);
+    }
+
+    footer .container {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      align-items: center;
+    }
+
+    footer .brand-mark {
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: -0.36px;
+      color: var(--bright);
+    }
+
+    @media (max-width: 920px) {
+      .wall-grid { grid-template-columns: repeat(2, 1fr); }
+      .featured-proof-grid {
+        grid-template-columns: 1fr;
+        max-width: 760px;
+      }
+    }
+
+    @media (max-width: 720px) {
+      section { padding: 64px 0; }
+      .hero { padding: 96px 24px 56px; }
+      .stats-row { grid-template-columns: 1fr; gap: 28px; }
+      .stats { grid-template-columns: repeat(2, 1fr); }
+      .stats .stat { padding: 22px 10px; }
+      .stats .stat .num { font-size: 26px; }
+      .cost-grid { grid-template-columns: 1fr; }
+      .skills-grid { grid-template-columns: 1fr; }
+      .chapter { grid-template-columns: 1fr; padding: 28px 24px; gap: 12px; }
+      .chapter .num { font-size: 36px; }
+      .price-box { padding: 36px 24px; }
+      .price-box .price { font-size: 56px; }
+      .pull { padding: 24px; font-size: 18px; }
+      .copy .lead { font-size: 19px; }
+      .t-quote { padding: 32px 24px 24px; }
+      .t-quote.featured { padding: 30px 24px 24px; }
+      .t-quote.featured blockquote { font-size: 18px; }
+      .ole-portrait { width: min(72vw, 280px); margin-bottom: 32px; }
+      .video-card .v-attr { padding: 20px 22px; }
+    }
+
+    /* GroundAI-inspired visual experiment */
+    :root {
+      --cream: #f4f1ec;
+      --paper: #ffffff;
+      --ink: #141413;
+      --taupe: #9e948b;
+      --soft: #f1f0ef;
+      --line-light: rgba(20, 20, 19, 0.1);
+      --inter-tight: 'Inter Tight', var(--font);
+      --serif-accent: 'Playfair Display', Georgia, serif;
+      --rounded-ui: 'SF Pro Rounded', var(--font);
+    }
+
+    body {
+      background: var(--cream);
+      color: var(--ink);
+      font-family: var(--rounded-ui);
+      letter-spacing: -0.02em;
+    }
+
+    section {
+      background: var(--paper);
+      color: var(--ink);
+      padding: 76px 0;
+      overflow: hidden;
+    }
+
+    section + section,
+    section.tight + section,
+    section + section.tight {
+      padding-top: 76px;
+    }
+
+    .container { max-width: 1360px; }
+    .container-narrow { max-width: 780px; }
+
+    .experiment-nav {
+      position: relative;
+      z-index: 3;
+      width: min(1360px, calc(100vw - 48px));
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .experiment-brand {
+      display: inline-flex;
+      align-items: center;
+      color: white;
+      font-family: var(--inter-tight);
+      font-size: 24px;
+      font-weight: 500;
+      text-decoration: none;
+    }
+
+    .experiment-brand-mark {
+      display: none;
+    }
+
+    .experiment-nav-links {
+      height: 56px;
+      padding: 6px 6px 6px 26px;
+      border-radius: 24px;
+      background: rgba(0, 0, 0, 0.36);
+      backdrop-filter: blur(18px);
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      box-shadow: 0 1px 0 rgba(255, 255, 255, 0.18) inset;
+    }
+
+    .experiment-nav-links a {
+      color: rgba(255, 255, 255, 0.78);
+      text-decoration: none;
+      font-size: 15px;
+      letter-spacing: -0.02em;
+      transition: color 0.16s ease;
+    }
+
+    .experiment-nav-links a:hover { color: white; }
+
+    .experiment-nav-links .nav-cta {
+      height: 44px;
+      padding: 0 20px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      color: var(--ink);
+      background: white;
+      font-weight: 600;
+    }
+
+    .hero {
+      min-height: 100vh;
+      padding: 32px 24px 34px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      text-align: center;
+      background:
+        linear-gradient(180deg, rgba(20, 20, 19, 0.18), rgba(20, 20, 19, 0.88)),
+        radial-gradient(circle at 50% 18%, rgba(167, 139, 250, 0.38), transparent 34%),
+        radial-gradient(circle at 16% 64%, rgba(158, 148, 139, 0.32), transparent 30%),
+        #141413;
+      color: white;
+    }
+
+    .hero::before {
+      inset: 0;
+      width: auto;
+      height: auto;
+      transform: none;
+      background:
+        linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+      background-size: 72px 72px;
+      mask-image: linear-gradient(to bottom, black 0%, transparent 72%);
+      opacity: 0.5;
+      filter: none;
+    }
+
+    .hero::after {
+      top: auto;
+      left: 50%;
+      bottom: -220px;
+      width: 800px;
+      height: 460px;
+      transform: translateX(-50%);
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.08);
+      filter: blur(80px);
+      opacity: 1;
+    }
+
+    .hero-inner {
+      max-width: 980px;
+      margin: auto;
+      padding: 46px 0 20px;
+    }
+
+    .hero .tag {
+      color: rgba(255, 255, 255, 0.78);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      box-shadow: none;
+      background: rgba(0, 0, 0, 0.18);
+      backdrop-filter: blur(16px);
+      margin-bottom: 28px;
+      font-family: var(--rounded-ui);
+    }
+
+    .tag .dot { background: #a78bfa; }
+
+    .hero h1 {
+      max-width: 900px;
+      margin: 0 auto 20px;
+      font-family: var(--inter-tight);
+      font-size: clamp(40px, 5.4vw, 62px);
+      font-weight: 500;
+      line-height: 0.98;
+      letter-spacing: -0.055em;
+      color: white;
+    }
+
+    .hero .accent {
+      font-family: var(--serif-accent);
+      font-weight: 400;
+      font-style: italic;
+      color: white;
+      background: none;
+      -webkit-text-fill-color: currentColor;
+    }
+
+    .gradient-text {
+      display: inline-block;
+      font-family: var(--inter-tight);
+      font-weight: 600;
+      font-style: normal;
+      color: transparent;
+      background: linear-gradient(90deg, var(--ink) 0%, #7c3aed 48%, #9e948b 100%);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero .lede {
+      max-width: 820px;
+      margin: 0 auto 24px;
+      color: rgba(255, 255, 255, 0.75);
+      font-size: clamp(17px, 1.55vw, 19px);
+      line-height: 1.35;
+      letter-spacing: -0.03em;
+    }
+
+    .hero .btn-large {
+      padding: 18px 32px;
+      font-size: 19px;
+    }
+
+    .btn {
+      border-radius: 18px;
+      font-family: var(--rounded-ui);
+    }
+
+    .btn-primary {
+      color: var(--ink);
+      background: white;
+      box-shadow: 0 22px 60px rgba(0, 0, 0, 0.25);
+    }
+
+    .btn-primary:hover { background: #e8e4de; }
+
+    .btn-meta {
+      color: rgba(255, 255, 255, 0.58);
+      font-size: 14px;
+      margin-top: 16px;
+    }
+
+    .stats-row {
+      width: min(1180px, 100%);
+      margin: 32px auto 0;
+      gap: 18px;
+    }
+
+    .stats-group {
+      padding: 16px;
+      border-radius: 28px;
+      background: rgba(0, 0, 0, 0.24);
+      backdrop-filter: blur(22px);
+      box-shadow: 0 1px 0 rgba(255, 255, 255, 0.14) inset;
+    }
+
+    .stats-caption {
+      color: rgba(255, 255, 255, 0.56);
+      margin-bottom: 12px;
+    }
+
+    .stats {
+      border-color: rgba(255, 255, 255, 0.22);
+    }
+
+    .stats .stat {
+      padding: 18px 10px;
+      border-color: rgba(255, 255, 255, 0.22);
+    }
+    .stats .stat .num {
+      color: white;
+      font-family: var(--inter-tight);
+      font-size: clamp(28px, 3.3vw, 38px);
+      font-weight: 700;
+    }
+    .stats .stat .num.accent {
+      color: #a78bfa;
+      font-family: var(--inter-tight);
+      font-style: normal;
+    }
+    .stats .stat .label { color: rgba(255, 255, 255, 0.58); }
+
+    .proof-strip {
+      background: var(--paper);
+      padding: 40px 24px 8px;
+    }
+
+    .proof-strip .stats-row {
+      max-width: 1180px;
+      margin: 0 auto;
+    }
+
+    .proof-strip .stats-group {
+      border: 0;
+      background: transparent;
+      box-shadow: none;
+      backdrop-filter: none;
+      padding: 0;
+    }
+
+    .proof-strip .stats-caption {
+      color: rgba(20, 20, 19, 0.45);
+      margin-bottom: 14px;
+    }
+
+    .proof-strip .stats {
+      border: 0;
+      gap: 12px;
+    }
+
+    .proof-strip .stats .stat {
+      border: 0;
+      border-radius: 16px;
+      background: rgba(20, 20, 19, 0.045);
+      padding: 28px 18px;
+    }
+
+    .proof-strip .stats .stat .num {
+      color: var(--ink);
+    }
+
+    .proof-strip .stats .stat .num.accent {
+      color: #7c3aed;
+    }
+
+    .proof-strip .stats .stat .label {
+      color: rgba(20, 20, 19, 0.52);
+    }
+
+    .orientation-section {
+      padding-top: 64px;
+      background: var(--paper);
+    }
+
+    .copy {
+      color: rgba(20, 20, 19, 0.7);
+      font-size: 20px;
+      line-height: 1.6;
+      letter-spacing: -0.035em;
+    }
+
+    .copy p { margin-bottom: 22px; }
+    .copy strong { color: var(--ink); font-weight: 600; }
+
+    .copy .lead {
+      color: var(--ink);
+      font-family: var(--inter-tight);
+      font-size: clamp(30px, 4vw, 46px);
+      line-height: 1.08;
+      letter-spacing: -0.055em;
+      font-weight: 500;
+    }
+
+    .heading-lg,
+    .display {
+      color: var(--ink);
+      font-family: var(--inter-tight);
+      font-weight: 500;
+      letter-spacing: -0.055em;
+    }
+
+    .heading-lg {
+      font-size: clamp(38px, 5.8vw, 66px);
+      line-height: 1.03;
+    }
+
+    .eyebrow {
+      color: rgba(20, 20, 19, 0.45);
+      font-family: var(--rounded-ui);
+    }
+
+    .story,
+    .guarantee,
+    .included,
+    .mentor-section,
+    .skills,
+    .faq {
+      background: var(--paper);
+    }
+
+    .story {
+      padding-bottom: 56px;
+    }
+
+    .story::before,
+    .guarantee::before,
+    .skills::before,
+    .price-section::before {
+      display: none;
+    }
+
+    .ole-portrait {
+      width: min(44vw, 280px);
+      border-radius: 999px;
+      box-shadow: 0 28px 80px rgba(20, 20, 19, 0.18);
+    }
+
+    .proof-card,
+    .chapter,
+    .source-list li,
+    .cost-card,
+    .skill,
+    .faq-item,
+    .wall-card,
+    .t-quote,
+    .video-card {
+      border: 1px solid var(--line-light);
+      background: var(--soft);
+      box-shadow: none;
+      border-radius: 28px;
+      color: var(--ink);
+    }
+
+    .proof-card {
+      border-left: 0;
+      padding: 30px;
+    }
+
+    .proof-card .proof-title { color: var(--ink); }
+    .proof-grid { border-color: var(--line-light); }
+    .proof-item { border-color: var(--line-light); }
+    .proof-item .num {
+      color: var(--ink);
+      font-family: var(--inter-tight);
+      font-size: 40px;
+    }
+    .proof-item .label { color: rgba(20, 20, 19, 0.48); }
+
+    .inside {
+      background: var(--paper);
+      padding-top: 58px;
+    }
+
+    .inside .head,
+    .included .head,
+    .skills .head,
+    .wall .head {
+      margin-bottom: 38px;
+    }
+
+    .inside .intro,
+    .included .head .intro,
+    .skills .head .intro,
+    .wall .head .intro {
+      color: rgba(20, 20, 19, 0.55);
+      font-size: 19px;
+    }
+
+    .chapter-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .chapter {
+      grid-template-columns: 1fr;
+      min-height: 370px;
+      padding: 34px;
+    }
+
+    .chapter .num {
+      width: 56px;
+      height: 56px;
+      border-radius: 18px;
+      display: grid;
+      place-items: center;
+      color: white;
+      background: var(--ink);
+      font-size: 20px;
+      font-family: var(--inter-tight);
+    }
+
+    .chapter h3 {
+      color: var(--ink);
+      font-family: var(--inter-tight);
+      font-size: 30px;
+      letter-spacing: -0.04em;
+    }
+
+    .chapter li {
+      color: rgba(20, 20, 19, 0.62);
+      font-size: 16px;
+    }
+
+    .chapter li::before { background: rgba(20, 20, 19, 0.34); }
+
+    .source-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .source-list li {
+      padding: 26px 28px 26px 68px;
+      color: rgba(20, 20, 19, 0.62);
+      font-size: 16px;
+    }
+
+    .source-list li::before {
+      left: 26px;
+      top: 26px;
+      width: 30px;
+      height: 30px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      color: white;
+      background: var(--taupe);
+    }
+
+    .source-list strong {
+      color: var(--ink);
+      font-family: var(--inter-tight);
+      font-size: 21px;
+      font-weight: 600;
+    }
+
+    .bonus-section {
+      padding-top: 96px;
+      background: #141413;
+      color: white;
+    }
+
+    .skills.bonus-section .heading-lg,
+    .skills.bonus-section .head .intro,
+    .bonus-section .copy,
+    .bonus-section .copy strong {
+      color: white;
+    }
+
+    .skills.bonus-section .head .intro,
+    .bonus-section .copy {
+      color: rgba(255, 255, 255, 0.68);
+    }
+
+    .mentor-section {
+      background: #141413;
+      color: white;
+      padding-top: 88px;
+    }
+
+    .mentor-section .heading-lg,
+    .mentor-section .copy strong { color: white; }
+    .mentor-section .copy { color: rgba(255, 255, 255, 0.68); }
+
+    .featured-proof-grid {
+      max-width: 1180px;
+      gap: 18px;
+    }
+
+    .featured-proof-grid .t-quote,
+    .featured-proof-grid .t-quote.featured {
+      background: var(--soft);
+      border-radius: 26px;
+    }
+
+    .t-quote::before {
+      color: var(--taupe);
+      opacity: 0.8;
+    }
+
+    .t-quote blockquote,
+    .t-quote.featured blockquote {
+      color: var(--ink);
+      font-weight: 400;
+    }
+
+    .t-quote blockquote strong {
+      color: var(--ink);
+      font-weight: 600;
+    }
+
+    .t-attr {
+      border-color: var(--line-light);
+    }
+
+    .t-name,
+    .v-name,
+    .w-name { color: var(--ink); }
+
+    .t-role,
+    .v-role,
+    .w-role { color: rgba(20, 20, 19, 0.48); }
+
+    .video-card {
+      background: #141413;
+      overflow: hidden;
+      border-color: rgba(20, 20, 19, 0.12);
+      box-shadow: 0 24px 90px rgba(20, 20, 19, 0.2);
+    }
+
+    .video-card .v-attr {
+      background: var(--soft);
+      border-color: var(--line-light);
+    }
+
+    .cost-grid {
+      gap: 16px;
+    }
+
+    .cost-card {
+      min-height: 220px;
+      padding: 30px;
+    }
+
+    .cost-card .role {
+      color: var(--ink);
+      font-family: var(--inter-tight);
+      font-size: 26px;
+    }
+
+    .cost-card .job { color: rgba(20, 20, 19, 0.56); }
+    .cost-card .cost { color: var(--taupe); }
+
+    .price-section {
+      background: #141413;
+      color: white;
+      padding-top: 108px;
+    }
+
+    .price-section .heading-lg,
+    .price-section .copy strong { color: white; }
+    .price-section .copy { color: rgba(255, 255, 255, 0.68); }
+
+    .price-box {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 32px;
+      box-shadow: none;
+      backdrop-filter: blur(18px);
+    }
+
+    .price-box .price-tag,
+    .price-box .price-note { color: rgba(255, 255, 255, 0.58); }
+
+    .price-box .price {
+      color: white;
+      font-family: var(--inter-tight);
+      font-weight: 700;
+    }
+
+    .wall-grid {
+      gap: 18px;
+    }
+
+    .wall-card {
+      background: var(--soft);
+      border-radius: 26px;
+    }
+
+    .wall-card .stars { color: var(--taupe); }
+    .wall-card blockquote { color: rgba(20, 20, 19, 0.72); }
+    .wall-card blockquote strong { color: var(--ink); }
+    .wall-card .w-attr { border-color: var(--line-light); }
+
+    .faq-list { max-width: 900px; }
+    .faq-q {
+      color: var(--ink);
+      font-family: var(--inter-tight);
+      font-size: 20px;
+    }
+    .faq-a-inner { color: rgba(20, 20, 19, 0.64); }
+
+    footer {
+      background: #141413;
+      color: rgba(255, 255, 255, 0.64);
+    }
+
+    footer .brand-mark { color: white; }
+
+    @media (max-width: 920px) {
+      .experiment-nav-links { display: none; }
+      .chapter-grid,
+      .source-list { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 600px) {
+      .experiment-nav {
+        width: calc(100vw - 32px);
+      }
+      .experiment-brand {
+        font-size: 18px;
+      }
+      .hero {
+        padding: 24px 16px 36px;
+      }
+      .hero-inner {
+        padding: 44px 0 26px;
+      }
+      .hero h1 {
+        font-size: clamp(34px, 10.5vw, 42px);
+        line-height: 1.02;
+        letter-spacing: -0.05em;
+      }
+      .hero .tag {
+        margin-bottom: 22px;
+        font-size: 12px;
+      }
+      .hero .lede {
+        font-size: 15.5px;
+        line-height: 1.42;
+        margin-bottom: 22px;
+      }
+      .hero .btn-large {
+        width: 100%;
+        max-width: 340px;
+        padding: 17px 24px;
+        font-size: 18px;
+      }
+      .proof-strip {
+        padding: 30px 16px 8px;
+      }
+      section,
+      section + section,
+      section.tight + section,
+      section + section.tight {
+        padding-top: 60px;
+        padding-bottom: 60px;
+      }
+      .wall-grid { grid-template-columns: 1fr; }
+      .proof-grid { grid-template-columns: 1fr; }
+      .proof-item {
+        border-right: 0;
+        border-bottom: 1px solid var(--line-light);
+      }
+      .proof-item:last-child {
+        border-bottom: 0;
+      }
+      .btn-large {
+        width: 100%;
+        max-width: 360px;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<section class="hero">
+  <header class="experiment-nav" aria-label="Main navigation">
+    <a class="experiment-brand" href="#">
+      <span>Claude Code Marketing MBA</span>
+    </a>
+    <nav class="experiment-nav-links" aria-label="Page sections">
+      <a href="#program">Program</a>
+      <a href="#get-access">Pricing</a>
+      <a href="#proof">Proof</a>
+      <a href="#faq">FAQ</a>
+      <a class="nav-cta" href="#get-access">Join</a>
+    </nav>
+  </header>
+  <div class="hero-inner">
+    <span class="tag"><span class="dot"></span><span class="tag-text">For non-technical founders and creators who want a full marketing team for a fraction of the cost:</span></span>
+    <h1>Go from overwhelmed by Claude Code to owning a team of <span class="accent">AI agents that run your marketing</span> (no technical ability required).</h1>
+    <p class="lede">In just 4 weeks, I'll personally walk you through installing AI agents into the most important parts of your business. This is a live walkthrough, every week, and you'll leave with a team of AI agents that write your content, build your landing pages, and run your funnel, all in your voice. It's the exact same setup that runs my own marketing behind 10M+ monthly views and $100K+ revenue months.</p>
+    <div>
+      <a href="#get-access" class="btn btn-primary btn-large">Save My Founding Seat</a>
+      <span class="btn-meta">Starts June 22 &middot; 40 founding seats</span>
+    </div>
+  </div>
+</section>
+
+<section class="proof-strip" aria-label="Program proof">
+    <div class="stats-row">
+      <div class="stats-group">
+        <p class="stats-caption">The system behind</p>
+        <div class="stats">
+          <div class="stat"><div class="num">10M+</div><div class="label">Monthly views</div></div>
+          <div class="stat"><div class="num">$100K+</div><div class="label">Revenue months</div></div>
+        </div>
+      </div>
+      <div class="stats-group">
+        <p class="stats-caption">Built so anyone can run it</p>
+        <div class="stats">
+          <div class="stat"><div class="num">403+</div><div class="label">Non-technical alumni</div></div>
+          <div class="stat"><div class="num accent">0</div><div class="label">Code required</div></div>
+        </div>
+      </div>
+    </div>
+</section>
+
+<section class="orientation-section tight">
+  <div class="container-narrow">
+    <div class="copy">
+      <p class="lead">If you want AI agents running your marketing, this cohort is built to help you install them for real.</p>
+      <p>You've probably watched half your feed swear that Claude Code runs their whole business while they sleep.</p>
+      <p><strong>But very few of them actually have the results to back it up.</strong></p>
+      <p>So maybe you tried following their setups and hit a wall, or maybe you haven't started because you don't know where to begin.</p>
+      <p><strong>That's exactly why I built this.</strong></p>
+      <p>I'm non-technical, and AI is infused into 100% of my marketing.</p>
+      <p>It does about 90% of the work, and I provide the taste, the judgment, and the direction.</p>
+      <p>I'm the architect, AI is the construction crew, and the hours it gives back are hours I get to spend with my son.</p>
+      <p>Over the next four weeks, I'll help you build the exact same thing.</p>
+      <p>All you'll need to run it is a single $100 Claude Max subscription (yep, that's the whole running cost), and you'll never touch a line of code.</p>
+      <p><strong>The cohort starts June 22, and I may not run it again for the foreseeable future.</strong></p>
+      <p><strong>First, let me tell you how I stumbled into it.</strong></p>
+    </div>
+  </div>
+</section>
+
+<section class="story">
+  <div class="container-narrow">
+    <div class="center" style="margin-bottom: 32px;">
+      <img class="ole-portrait" src="assets/testimonials/ole-portrait.jpg" alt="Ole Lehmann" loading="lazy">
+      <span class="eyebrow">The Backstory</span>
+      <h2 class="heading-lg">Hey, I'm Ole.</h2>
+    </div>
+    <div class="copy">
+      <p class="lead">I've built a seven-figure personal brand, and I have AI installed in every part of my business, as a guy who's about as technical as a potato.</p>
+      <p><strong>Last year, getting there felt impossible.</strong></p>
+      <p>I tried to get Claude running for my marketing four separate times, and every attempt made me feel like a complete donkey.</p>
+      <p>I'd find a YouTube tutorial, follow every step, and then the guy would casually say something that made my brain go totally blank.</p>
+      <p>Meanwhile my feed was full of people posting their slick automated setups.</p>
+      <p>And there I was, coffee stains all over my desk, staring at a blinking cursor with nothing to show for it.</p>
+      <p>So I gave up on copying the technical guys and went the other way.</p>
+      <p>I built one dead-simple skill, and it worked on the first try.</p>
+      <p><strong>I was hooked.</strong></p>
+      <p>A few nights later I went deeper.</p>
+      <p>I put my son to bed, kicked off a task before dinner, ran outside to wrestle our patio furniture away from the pool in the wind, and came back to three finished landing pages.</p>
+      <p><strong>Competitor research done, design studied, copy written in my actual voice.</strong></p>
+      <p><strong>Eight minutes, zero code.</strong></p>
+      <p>So I started building more of these simple skills and installing them into the most important parts of my business, and my content went out faster, my pages shipped in an afternoon, and the funnel started running without me.</p>
+      <p>The results since then: 10M+ monthly views, $100K+ revenue months, and a business on track for seven figures this year, with AI running underneath all of it.</p>
+      <p>Then friends started asking how, so I worked closely with them to set it up too.</p>
+      <p>That grew into two workshops, where 400+ non-technical founders and creators learned the system and rated it 4.8 out of 5 stars.</p>
+      <p>And the most common question at the end of those workshops: "Can you help me go deeper and actually master this?"</p>
+      <p><strong>So I built this cohort.</strong></p>
+    </div>
+    <div class="proof-card story-proof">
+      <div class="proof-title">The audience behind the system:</div>
+      <div class="proof-grid">
+        <div class="proof-item"><span class="num">40,000</span><span class="label">Newsletter subscribers</span></div>
+        <div class="proof-item"><span class="num">350,000+</span><span class="label">Followers across all platforms</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="inside" id="program">
+  <div class="container">
+    <div class="head">
+      <span class="eyebrow">Introducing</span>
+      <h2 class="heading-lg"><span class="gradient-text">The Claude Code Marketing MBA.</span></h2>
+      <p class="intro">The only program a non-technical founder needs to turn Claude into a marketing team that works for you.</p>
+    </div>
+
+    <div class="chapter-grid">
+      <div class="chapter">
+        <div class="num">01</div>
+        <div>
+          <h3>Week 1: Make Claude sound, feel, and behave like you</h3>
+          <ul>
+            <li>Set up Claude Code from scratch with me on the call, even if you've never installed anything like this before</li>
+            <li>Build your CLAUDE.md so every agent knows how you sound, who you're talking to, and what you sell</li>
+            <li>Connect Claude to the tools you already work in, so it lives inside the business you actually run</li>
+            <li>So you can get output that sounds exactly like you, with no generic AI slop to rewrite.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="chapter">
+        <div class="num">02</div>
+        <div>
+          <h3>Week 2: Build your content engine</h3>
+          <ul>
+            <li>Build writing and editing agents that draft and polish in your voice</li>
+            <li>Turn one idea into a full week of posts for X, LinkedIn, Instagram, TikTok, and your newsletter</li>
+            <li>Spin that same idea into short-form video scripts and hooks for Reels, TikTok, and Shorts.</li>
+            <li>So you can create a week of content in under an hour, in a voice that's unmistakably yours.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="chapter">
+        <div class="num">03</div>
+        <div>
+          <h3>Week 3: Build your funnel</h3>
+          <ul>
+            <li>Write and publish a lead magnet that pulls in the right people</li>
+            <li>Build a landing page live on your own domain, styled like any site you admire</li>
+            <li>Draft a welcome email sequence that follows up and sells for you automatically</li>
+            <li>So you can have something collecting real emails by next week.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="chapter">
+        <div class="num">04</div>
+        <div>
+          <h3>Week 4: Put the whole thing on autopilot</h3>
+          <ul>
+            <li>Build a research agent that reads your niche every morning and tells you what to post.</li>
+            <li>Set up a weekly report that shows which posts are actually working</li>
+            <li>Learn to turn any repeatable task into its own Claude Code workflow.</li>
+            <li>So the engine runs itself, and you spend five minutes on a Monday morning reading the report and clicking a couple of buttons. Everything else just happens.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="cta-inline">
+      <a href="#get-access" class="btn btn-primary btn-large">Join the cohort</a>
+    </div>
+  </div>
+</section>
+
+<section class="included outcome-section">
+  <div class="container">
+    <div class="head">
+      <h2 class="heading-lg">By the end, you have a full marketing team running for you, at almost no cost.</h2>
+      <p class="intro">You walk away owning a working system that's already up and running.</p>
+    </div>
+
+    <ul class="source-list">
+      <li><strong>A CLAUDE.md</strong>Captures how you sound, who you serve, and what you sell, so everything Claude makes already reads like you wrote it.</li>
+      <li><strong>A content engine</strong>Turns one idea into a week of posts and video scripts in under an hour.</li>
+      <li><strong>Writing and editing agents</strong>Draft and polish for you, turning the hours you'd spend editing into a couple of minutes.</li>
+      <li><strong>A morning research agent</strong>Reads your niche and hands you what to post, so you never fry your brain doomscrolling for ideas again.</li>
+      <li><strong>A weekly report</strong>Shows which posts landed, so you always know what to make more of.</li>
+      <li><strong>A lead magnet, freebie page, and welcome sequence</strong>Turns the emails you collect into buyers who love your brand.</li>
+      <li><strong>A landing page live on your own domain</strong>Built to match a look you love.</li>
+      <li><strong>Social graphics and post images</strong>Ready to regenerate any time in your brand colors and style, no designer in the loop.</li>
+    </ul>
+    <div class="container-narrow">
+      <div class="copy">
+        <p>So imagine this: you're no longer spread thin across five jobs at once.</p>
+        <p>AI handles the research, the drafts, and the boring work.</p>
+        <p>More of your content is landing, more customers are coming through, and you finally have the time to focus on the part of the business only you can do.</p>
+        <p>And because this isn't a pile of templates that goes stale with the next AI update, the system keeps building itself as you get better with AI.</p>
+        <p>Underneath all of it, you're learning to orchestrate AI agents, the most valuable skill of the next decade.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="skills bonus-section">
+  <div class="container-narrow">
+    <div class="head">
+      <h2 class="heading-lg">Bonus: every Skill I use, installed on day one.</h2>
+      <p class="intro">When you invest in this first round, I'm handing you every single Skill that runs my own marketing: landing pages, sales copy, newsletters, viral hooks, content repurposing, and more.</p>
+    </div>
+
+    <div class="copy">
+      <p>You don't have to build any of them yourself.</p>
+      <p>You copy-paste them in, and they work from day one.</p>
+      <p>I built this library over hundreds of hours for my own seven-figure business, so this alone saves you months of trial and error.</p>
+    </div>
+  </div>
+</section>
+
+<section class="mentor-section">
+  <div class="container-narrow">
+    <h2 class="heading-lg">You bring the business. I'll make the AI part simple.</h2>
+    <div class="copy">
+      <p>You won't write a line of code, and you won't need to understand how any of this works under the hood.</p>
+      <p>What you get is someone who's already done it, over and over, and knows how to teach it to people who don't speak engineer.</p>
+      <p>I've helped 400+ non-technical founders and creators install AI into their businesses.</p>
+      <p>I've worked with 8-figure companies, spoken about AI at Google I/O, and broken these systems down on This Week in Startups.</p>
+      <p>This is the first time you can get the whole thing directly from me, built alongside you, in four weeks.</p>
+    </div>
+  </div>
+</section>
+
+<section class="tight" id="proof">
+  <div class="container">
+    <div class="center" style="margin-bottom: 32px;">
+      <h2 class="heading-lg">This already works for people who started exactly where you are.</h2>
+    </div>
+    <div class="featured-proof-grid">
+      <div class="t-quote featured">
+        <blockquote>I've bought several of Ole's products over the past year. <strong>Every one has moved my business forward.</strong> That pattern doesn't happen by accident. Ole takes genuinely complex material and makes it simple. Not dumbed down. Actually simple. The tools are practical. You use them the next day.</blockquote>
+        <div class="t-attr">
+          <div class="t-avatar">D<img src="assets/testimonials/dan.jpg" alt="" loading="lazy"></div>
+          <div>
+            <div class="t-name">Dan Scholes</div>
+            <div class="t-role">President</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="t-quote featured">
+        <blockquote>Shortened the learning curve on this tool from <strong>at least a week on my own to a couple of hours.</strong> I use the Skills we installed every single day. This week I took a landing page from concept to live online in less than two hours applying what I learned.</blockquote>
+        <div class="t-attr">
+          <div class="t-avatar">T<img src="assets/testimonials/tanya.jpg" alt="" loading="lazy"></div>
+          <div>
+            <div class="t-name">Tanya Holden</div>
+            <div class="t-role">Founder</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="t-quote featured">
+        <blockquote>Ole is my favorite "techy" in the digital space. As somebody wanting to learn AI with <strong>ZERO experience and technical skill</strong>, I got exactly what I was looking for. Already seeing my workflows 10x. Will buy from Ole again without hesitation. 10/10.</blockquote>
+        <div class="t-attr">
+          <div class="t-avatar">B<img src="assets/testimonials/brian.jpg" alt="" loading="lazy"></div>
+          <div>
+            <div class="t-name">Brian Maierhofer</div>
+            <div class="t-role">Therapist &amp; Creator</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="t-quote featured">
+        <blockquote>Ole's course helped me get started in a very simple way, without the overwhelming AI goldrush hype. <strong>Before Claude I'd hired frontend webdesigners spending up to 5 figures.</strong> Now I can do it on my own in a couple of hours.</blockquote>
+        <div class="t-attr">
+          <div class="t-avatar">A</div>
+          <div>
+            <div class="t-name">Angelo</div>
+            <div class="t-role">Entrepreneur</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="t-quote featured">
+        <blockquote>I wanted to say thank you for OS #1. <strong>It totally changed the way I think about work</strong>, not only just changing how I work. I appreciate the gradual build of how to learn mastering Claude, as it is dense and intimidating doing it on your own.</blockquote>
+        <div class="t-attr">
+          <div class="t-avatar">R<img src="assets/testimonials/ryan.jpg" alt="" loading="lazy"></div>
+          <div>
+            <div class="t-name">Ryan Waddell</div>
+            <div class="t-role">Principal</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="video-card">
+      <video src="assets/testimonials/kai-testimonial.mp4" controls preload="metadata" playsinline poster="assets/testimonials/kai-poster.jpg"></video>
+      <div class="v-attr">
+        <div class="v-avatar">K<img src="assets/testimonials/kai.jpg" alt="" loading="lazy"></div>
+        <div>
+          <div class="v-name">Kai Lode</div>
+          <div class="v-role">Founder, QuizFunnel</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container-narrow">
+    <div class="center" style="margin-bottom: 32px;">
+      <h2 class="heading-lg">Here's what you'd pay to do this the old way.</h2>
+    </div>
+    <div class="copy">
+      <p>A year ago, to get what this system does for you, you'd be hiring:</p>
+    </div>
+
+    <div class="cost-grid">
+      <div class="cost-card">
+        <div class="role">Ghostwriter</div>
+        <div class="job">Write your posts and newsletter in your voice.</div>
+        <div class="cost">$3,000 to $6,000 a month</div>
+      </div>
+      <div class="cost-card">
+        <div class="role">Funnel marketer</div>
+        <div class="job">Build your lead magnets, landing pages, and email sequences.</div>
+        <div class="cost">$4,000 to $8,000 a month</div>
+      </div>
+      <div class="cost-card">
+        <div class="role">Designer</div>
+        <div class="job">Make it all look professional every time you need a page.</div>
+        <div class="cost">$1,500 to $3,000 per page</div>
+      </div>
+    </div>
+
+    <div class="copy">
+      <p><strong>Add it up and you're paying roughly $8,500 to $17,000, every single month, to people who don't know your business.</strong></p>
+      <p>And the money is the easy part.</p>
+      <p>You have to find them, vet them, train them, chase the invoices, and coordinate everyone's schedules just to ship one campaign.</p>
+      <p>The day one of them quits, the whole thing stops.</p>
+      <p><strong>Now compare that: you build this system once, and it runs on a single $100 Claude Max subscription.</strong></p>
+      <p>None of the messy human overhead.</p>
+      <p>It never sleeps, never quits, and it's ready the second you need it.</p>
+    </div>
+  </div>
+</section>
+
+<section class="price-section" id="get-access">
+  <div class="container">
+    <div class="center">
+      <h2 class="heading-lg">Your investment</h2>
+    </div>
+    <div class="container-narrow" style="padding-top: 24px;">
+      <div class="copy" style="text-align: left;">
+        <p>My plan is to run this cohort at $2,000.</p>
+        <p>Considering everything we'll build together, that's still less than one month of the cheapest hire on the list above.</p>
+        <p>But this is the first time I'm running it.</p>
+        <p>So I'm looking for committed founders who'll share testimonials, feedback, and case studies once they get results.</p>
+        <p><strong>If that sounds like you, this invitation is for the Founders Price of $997, one time.</strong></p>
+        <p>The quality stays exactly the same.</p>
+        <p>You just get in for less than half of what every cohort after this one will pay, and I get to spend more direct time with you.</p>
+        <p><strong>This price only exists for this launch, and there are only 40 seats.</strong></p>
+      </div>
+    </div>
+    <div class="price-box">
+      <span class="price-tag">Claude Code Marketing MBA</span>
+      <div class="price">$997</div>
+      <div class="price-note">One-time payment &middot; 4 weeks live &middot; 40 founding seats</div>
+      <a href="#faq" class="btn btn-primary btn-large">Join the cohort</a>
+    </div>
+  </div>
+</section>
+
+<section class="guarantee">
+  <div class="container-narrow">
+    <div class="center">
+      <h2 class="heading-lg">Ole's Obviously Awesome Guarantee</h2>
+    </div>
+    <div class="copy">
+      <p>There are a lot of people shilling crappy AI products right now.</p>
+      <p>You've seen them.</p>
+      <p>So I understand the skepticism.</p>
+      <p><strong>I'm not one of them.</strong></p>
+      <p>400+ founders have been through my workshops and rated them 4.8 out of 5 stars.</p>
+      <p>So here's the deal: do the work, and if you're anything less than blown away within two weeks, email me and I'll refund every cent.</p>
+      <p><strong>No hoops, no "are you sure you want to leave?" call, no questions asked.</strong></p>
+      <p>And you keep everything you've built.</p>
+      <p>I'm only looking for people who are serious about building this.</p>
+    </div>
+  </div>
+</section>
+
+<section class="guarantee">
+  <div class="container-narrow">
+    <div class="center">
+      <h2 class="heading-lg">Founding members only. 40 seats.</h2>
+    </div>
+    <div class="copy">
+      <p>The group is capped at 40 on purpose, so you get close support, real feedback on your actual business, and never feel like just another name in the crowd.</p>
+      <p>When the seats are gone, they're gone, and the next round is double the price.</p>
+    </div>
+    <div class="cta-inline">
+      <a href="#get-access" class="btn btn-primary btn-large">Grab your seat</a>
+    </div>
+  </div>
+</section>
+
+<section class="included">
+  <div class="container">
+    <div class="head">
+      <h2 class="heading-lg">What's included</h2>
+    </div>
+    <ul class="source-list">
+      <li><strong>One live session a week</strong>For all four weeks, where we teach and build together in real time.</li>
+      <li><strong>One office hour a week</strong>To get unstuck on your own setup with eyes on your actual business.</li>
+      <li><strong>A private community</strong>Ask questions and keep momentum going between sessions.</li>
+      <li><strong>Lifetime access to every recording</strong>Rewatch any session whenever you need it.</li>
+      <li><strong>Direct, personalized feedback</strong>The kind you only get in a small group.</li>
+    </ul>
+    <div class="container-narrow">
+      <div class="copy">
+        <p>Plan on about two to four hours a week total: one live session, plus one to three hours of your own build time.</p>
+        <p>Starts June 22.</p>
+        <p>All you need is a laptop and a Claude Max subscription.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container-narrow">
+    <div class="center" style="margin-bottom: 32px;">
+      <h2 class="heading-lg">Ready to build it?</h2>
+    </div>
+    <div class="copy">
+      <p>You've seen the whole thing: four weeks, live, where you build a team of AI agents that runs your marketing in your voice, plus the skill to keep growing it for good.</p>
+      <p>If you're done starting from scratch every time you sit down to market your business, and you want the whole system built and running by the time the cohort ends, this is for you.</p>
+      <p>Grab one of the 40 founding seats at $997 before they're gone.</p>
+    </div>
+    <div class="cta-inline">
+      <a href="#get-access" class="btn btn-primary btn-large">Join the cohort</a>
+    </div>
+  </div>
+</section>
+
+<section class="wall">
+  <div class="container">
+    <div class="head">
+      <span class="eyebrow">403+ Alumni</span>
+      <h2 class="heading-lg">Real results from my non-technical students.</h2>
+      <p class="intro">Every quote is from a student who installed the system on their own machine.</p>
+    </div>
+
+    <div class="wall-grid">
+      <div class="wall-card">
+        <div class="stars">★★★★★</div>
+        <blockquote>The Marketing OS is exactly what I needed. <strong>No fluff, no filler.</strong> Ole breaks down complex marketing systems into clear, actionable steps that you can actually implement. The bite-sized videos let you learn at your own pace, and having everything organized inside Notion means you can reference it anytime without digging through your inbox.</blockquote>
+        <div class="w-attr">
+          <div class="w-avatar">L<img src="assets/testimonials/laura.jpg" alt="" loading="lazy"></div>
+          <div>
+            <div class="w-name">Laura</div>
+            <div class="w-role">Just The Metrics Newsletter</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="wall-card">
+        <div class="stars">★★★★★</div>
+        <blockquote>As a medical professional, time is genuinely precious. <strong>Lehmann's training has transformed how I use AI.</strong> Ole's remarkable ability to cut through the complex tools and zero in on the high-impact takeaways. Rather than overwhelming you with every possible feature, he identifies what actually moves the needle.</blockquote>
+        <div class="w-attr">
+          <div class="w-avatar">G</div>
+          <div>
+            <div class="w-name">George Forgan-Smith</div>
+            <div class="w-role">Medical Marketer</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="wall-card">
+        <div class="stars">★★★★★</div>
+        <blockquote>This is very practical and rich training. The hands-on approach gives one confidence to immediately build something. Which was what I did. <strong>I built 2 landing pages for a family member's business.</strong> Would definitely recommend for friends. Thanks Ole.</blockquote>
+        <div class="w-attr">
+          <div class="w-avatar">S</div>
+          <div>
+            <div class="w-name">Seun Adeosun</div>
+            <div class="w-role">Marketer</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="wall-card">
+        <div class="stars">★★★★★</div>
+        <blockquote>Ole is the person to go for AI Marketing. He creates systems that work, has great tips and most important nowadays: <strong>he's an honest person that doesn't overpromise</strong> and sell you shiny stuff that in the end doesn't work.</blockquote>
+        <div class="w-attr">
+          <div class="w-avatar">L</div>
+          <div>
+            <div class="w-name">Luis</div>
+            <div class="w-role">Marketer</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="wall-card">
+        <div class="stars">★★★★★</div>
+        <blockquote>It was my first introduction to Claude Cowork Skills and Ole absolutely nailed it. <strong>I started using Claude Cowork on a daily basis</strong> in my business. Since then I've created several of my own skills.</blockquote>
+        <div class="w-attr">
+          <div class="w-avatar">C</div>
+          <div>
+            <div class="w-name">Chris</div>
+            <div class="w-role">Self-Publisher</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="wall-card">
+        <div class="stars">★★★★★</div>
+        <blockquote>I'd been meaning to look more into Claude. The explanation together with the selection of Skills was a great introduction and <strong>helped me to get started fast</strong> with it.</blockquote>
+        <div class="w-attr">
+          <div class="w-avatar">A</div>
+          <div>
+            <div class="w-name">Aarif Meghani</div>
+            <div class="w-role">Founder</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="wall-card">
+        <div class="stars">★★★★★</div>
+        <blockquote>Love it. Ole really knows what he's talking about and <strong>I learned so much</strong>. Highly recommended, would definitely sign up again!</blockquote>
+        <div class="w-attr">
+          <div class="w-avatar">C<img src="assets/testimonials/conni.jpg" alt="" loading="lazy"></div>
+          <div>
+            <div class="w-name">Conni Biesalski</div>
+            <div class="w-role">Creator</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="wall-card">
+        <div class="stars">★★★★★</div>
+        <blockquote>I had the same bottleneck with landing pages. Now I build them in minutes and <strong>can produce way more lead magnets</strong> for my business because of it.</blockquote>
+        <div class="w-attr">
+          <div class="w-avatar">R<img src="assets/testimonials/rachel.jpg" alt="" loading="lazy"></div>
+          <div>
+            <div class="w-name">Rachel</div>
+            <div class="w-role">CEO</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="wall-card">
+        <div class="stars">★★★★</div>
+        <blockquote>Found the skills I learned very useful. <strong>I've been consistently applying three to four of them in my work.</strong> 100% worth my time and money. If you like to use Codex (ChatGPT) the skills work there too.</blockquote>
+        <div class="w-attr">
+          <div class="w-avatar">D</div>
+          <div>
+            <div class="w-name">Diego</div>
+            <div class="w-role">Co-Founder</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="wall-card">
+        <div class="stars">★★★★★</div>
+        <blockquote>Ole is the best I've come across at explaining how SMEs can leverage AI effectively, and <strong>he has inspired many of the workflows we've since integrated into our business.</strong> His recent webinar on Claude was especially insightful.</blockquote>
+        <div class="w-attr">
+          <div class="w-avatar">M<img src="assets/testimonials/maximilian.jpg" alt="" loading="lazy"></div>
+          <div>
+            <div class="w-name">Maximilian Vargas</div>
+            <div class="w-role">CEO, Blockstories</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="wall-card">
+        <div class="stars">★★★★★</div>
+        <blockquote>I tend to get so caught up in the day-to-day grind that I rarely pause to step back, plan, or explore ways to optimize my workflow. <strong>This has really opened my eyes to how a strategic mindset can enhance the work I'm already doing.</strong> I estimate this will cut 30% to 40% off my weekly workload.</blockquote>
+        <div class="w-attr">
+          <div class="w-avatar">J</div>
+          <div>
+            <div class="w-name">Joshua Hale</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="faq" id="faq">
+  <div class="container">
+    <div class="center">
+      <span class="eyebrow">FAQ</span>
+      <h2 class="heading-lg">Your questions, answered.</h2>
+    </div>
+
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-q">What is this, exactly?<span class="toggle" aria-hidden="true"></span></div>
+        <div class="faq-a"><div class="faq-a-inner">Four weeks, live, where you build a team of AI agents that runs your marketing, with me walking you through every step. You finish with a working system you own, plus the skill to keep building on it for good.</div></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">Won't this be out of date in two months?<span class="toggle" aria-hidden="true"></span></div>
+        <div class="faq-a"><div class="faq-a-inner">It's the reason most people never buy AI products, and it's fair. But I'm not handing you a pile of templates that expire the next time the tools update. I'm teaching you the skill underneath: how to build AI agents and workflows in a simple, repeatable way. So when a new platform or tool shows up, you just build the workflow yourself in an afternoon.</div></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">Who's it for?<span class="toggle" aria-hidden="true"></span></div>
+        <div class="faq-a"><div class="faq-a-inner">Non-technical founders and creators who want AI working in their business without becoming a developer to get it.</div></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">How is this different from a cheaper AI course?<span class="toggle" aria-hidden="true"></span></div>
+        <div class="faq-a"><div class="faq-a-inner">Most AI courses hand you templates and leave you to figure it out alone. This is built with you, live and tailored to your business, and you walk out with a working system plus the skill to keep building. That's what the cheaper courses can't give you.</div></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">How soon will I see results?<span class="toggle" aria-hidden="true"></span></div>
+        <div class="faq-a"><div class="faq-a-inner">Fast. By the end of week one, Claude is writing in your voice. By the end of week two, you've got a content engine running and a funnel taking shape. Most of the system is live before the cohort even ends.</div></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">Do I need to be technical?<span class="toggle" aria-hidden="true"></span></div>
+        <div class="faq-a"><div class="faq-a-inner">No, and neither am I. Week 1 gets you set up from absolute zero, every click handled together. You need nothing ready before we start.</div></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">I work full-time. What's the time commitment?<span class="toggle" aria-hidden="true"></span></div>
+        <div class="faq-a"><div class="faq-a-inner">About two to four hours a week: one live hour plus your own build time. Every session is recorded, so if a week gets busy you watch the replay and bring questions to office hours.</div></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">What if I can't make a live session?<span class="toggle" aria-hidden="true"></span></div>
+        <div class="faq-a"><div class="faq-a-inner">Every session is recorded and yours for life. Watch the replay, then bring anything you're stuck on to that week's office hour.</div></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">What exactly do I need to start?<span class="toggle" aria-hidden="true"></span></div>
+        <div class="faq-a"><div class="faq-a-inner">A laptop (Mac or Windows) and a Claude Max subscription. That's it. We handle setup together in week 1.</div></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">What if it turns out not to be right for me?<span class="toggle" aria-hidden="true"></span></div>
+        <div class="faq-a"><div class="faq-a-inner">Then Ole's Obviously Awesome Guarantee has you covered. Do the work, and if you're not blown away within two weeks, email me for a full refund, and you keep everything you've built.</div></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">What does it cost?<span class="toggle" aria-hidden="true"></span></div>
+        <div class="faq-a"><div class="faq-a-inner">$997 as a founding member, one time, until the 40 seats are gone. Every cohort after this one is $2,000.</div></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">Is there a payment plan?<span class="toggle" aria-hidden="true"></span></div>
+        <div class="faq-a"><div class="faq-a-inner">Reach out before the cohort fills and we'll sort something out.</div></div>
+      </div>
+    </div>
+
+    <div class="cta-inline">
+      <a href="#get-access" class="btn btn-primary btn-large">Join the cohort</a>
+      <span class="btn-meta">Starts June 22 &middot; Founding members only &middot; 40 seats</span>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="brand-mark">The AI Solopreneur</div>
+    <div>&copy; 2026 The AI Solopreneur &middot; Claude Code Marketing MBA</div>
+  </div>
+</footer>
+
+<script>
+  document.querySelectorAll('.faq-q').forEach(function(q) {
+    q.addEventListener('click', function() {
+      var item = this.parentElement;
+      var answer = item.querySelector('.faq-a');
+      var isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(function(fi) {
+        fi.classList.remove('open');
+        fi.querySelector('.faq-a').style.maxHeight = null;
+      });
+      if (!isOpen) {
+        item.classList.add('open');
+        answer.style.maxHeight = (answer.scrollHeight + 40) + 'px';
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
