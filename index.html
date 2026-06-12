@@ -2508,6 +2508,52 @@
       text-align: left;
     }
 
+    .story-proof {
+      max-width: 100%;
+      margin-top: 34px;
+      padding: 28px;
+      border-radius: 28px;
+    }
+
+    .story-proof .proof-title {
+      margin-bottom: 18px;
+      color: var(--ink);
+      font-family: var(--font);
+      font-size: 24px;
+      line-height: 1.2;
+      letter-spacing: -0.04em;
+      font-weight: 700;
+    }
+
+    .story-proof .proof-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      border: 0;
+    }
+
+    .story-proof .proof-item {
+      border: 0;
+      border-radius: 18px;
+      background: rgba(250,248,255,0.72);
+      padding: 20px 14px;
+      text-align: left;
+    }
+
+    .story-proof .proof-item .num {
+      color: var(--amethyst);
+      font-family: var(--font);
+      font-size: clamp(30px, 3vw, 42px);
+      letter-spacing: -0.05em;
+      margin-bottom: 8px;
+    }
+
+    .story-proof .proof-item .label {
+      text-align: left;
+      color: rgba(76,29,149,0.58);
+      font-size: 11px;
+      letter-spacing: 1.2px;
+    }
+
     .head,
     .center {
       text-align: center;
@@ -2967,6 +3013,10 @@
         grid-template-columns: 1fr;
       }
 
+      .story-proof .proof-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
       .heading-lg {
         font-size: clamp(38px, 12vw, 54px);
       }
@@ -3078,6 +3128,14 @@
         grid-template-columns: 1fr;
       }
 
+      .story-proof {
+        padding: 22px;
+      }
+
+      .story-proof .proof-grid {
+        grid-template-columns: 1fr;
+      }
+
       .source-list li {
         padding-left: 66px;
       }
@@ -3157,25 +3215,6 @@
   </div>
 </section>
 
-<section class="proof-strip" aria-label="Program proof">
-    <div class="stats-row">
-      <div class="stats-group">
-        <p class="stats-caption">The system behind</p>
-        <div class="stats">
-          <div class="stat"><div class="num">10M+</div><div class="label">Monthly views</div></div>
-          <div class="stat"><div class="num">$100K+</div><div class="label">Revenue months</div></div>
-        </div>
-      </div>
-      <div class="stats-group">
-        <p class="stats-caption">Built so anyone can run it</p>
-        <div class="stats">
-          <div class="stat"><div class="num">403+</div><div class="label">Non-technical alumni</div></div>
-          <div class="stat"><div class="num accent">0</div><div class="label">Code required</div></div>
-        </div>
-      </div>
-    </div>
-</section>
-
 <section class="orientation-section tight">
   <div class="container-narrow">
     <div class="copy">
@@ -3224,10 +3263,14 @@
       <p><strong>So I built this cohort.</strong></p>
     </div>
     <div class="proof-card story-proof">
-      <div class="proof-title">The audience behind the system:</div>
+      <div class="proof-title">The proof behind the system:</div>
       <div class="proof-grid">
+        <div class="proof-item"><span class="num">10M+</span><span class="label">Monthly views</span></div>
+        <div class="proof-item"><span class="num">$100K+</span><span class="label">Revenue months</span></div>
         <div class="proof-item"><span class="num">40,000</span><span class="label">Newsletter subscribers</span></div>
         <div class="proof-item"><span class="num">350,000+</span><span class="label">Followers across all platforms</span></div>
+        <div class="proof-item"><span class="num">403+</span><span class="label">Non-technical alumni</span></div>
+        <div class="proof-item"><span class="num">0</span><span class="label">Code required</span></div>
       </div>
     </div>
   </div>
