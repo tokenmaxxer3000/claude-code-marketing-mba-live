@@ -521,6 +521,17 @@
       font-weight: 700;
       letter-spacing: -0.6px;
       margin-bottom: 6px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    @keyframes numSettle {
+      0% { transform: scale(1); }
+      40% { transform: scale(1.08); }
+      100% { transform: scale(1); }
+    }
+
+    .proof-item .num.count-done {
+      animation: numSettle 0.5s cubic-bezier(0.22, 1, 0.36, 1);
     }
 
     .proof-item .label {
@@ -3265,12 +3276,12 @@
     <div class="proof-card story-proof">
       <div class="proof-title">The proof behind the system:</div>
       <div class="proof-grid">
-        <div class="proof-item"><span class="num">10M+</span><span class="label">Monthly views</span></div>
-        <div class="proof-item"><span class="num">$100K+</span><span class="label">Revenue months</span></div>
-        <div class="proof-item"><span class="num">40,000</span><span class="label">Newsletter subscribers</span></div>
-        <div class="proof-item"><span class="num">350,000+</span><span class="label">Followers across all platforms</span></div>
-        <div class="proof-item"><span class="num">403+</span><span class="label">Non-technical alumni</span></div>
-        <div class="proof-item"><span class="num">0</span><span class="label">Code required</span></div>
+        <div class="proof-item"><span class="num" data-count-to="10" data-suffix="M+">10M+</span><span class="label">Monthly views</span></div>
+        <div class="proof-item"><span class="num" data-count-to="100" data-prefix="$" data-suffix="K+">$100K+</span><span class="label">Revenue months</span></div>
+        <div class="proof-item"><span class="num" data-count-to="40000" data-grouped>40,000</span><span class="label">Newsletter subscribers</span></div>
+        <div class="proof-item"><span class="num" data-count-to="350000" data-suffix="+" data-grouped>350,000+</span><span class="label">Followers across all platforms</span></div>
+        <div class="proof-item"><span class="num" data-count-to="403" data-suffix="+">403+</span><span class="label">Non-technical alumni</span></div>
+        <div class="proof-item"><span class="num" data-count-to="0">0</span><span class="label">Code required</span></div>
       </div>
     </div>
   </div>
@@ -3880,6 +3891,56 @@
     }, { threshold: 0.04, rootMargin: '0px 0px 18% 0px' });
 
     targets.forEach(function(el) { observer.observe(el); });
+  })();
+
+  (function() {
+    var grid = document.querySelector('.proof-grid');
+    if (!grid) return;
+    if (!('IntersectionObserver' in window) || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      return; // final values are already in the markup
+    }
+
+    function format(value, grouped) {
+      var rounded = Math.round(value);
+      return grouped ? rounded.toLocaleString('en-US') : String(rounded);
+    }
+
+    function animate(el, delay) {
+      var target = parseFloat(el.getAttribute('data-count-to'));
+      var prefix = el.getAttribute('data-prefix') || '';
+      var suffix = el.getAttribute('data-suffix') || '';
+      var grouped = el.hasAttribute('data-grouped');
+      var duration = 1800;
+
+      el.textContent = prefix + format(0, grouped) + suffix;
+
+      setTimeout(function() {
+        var start = null;
+        function step(ts) {
+          if (start === null) start = ts;
+          var progress = Math.min((ts - start) / duration, 1);
+          var eased = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
+          el.textContent = prefix + format(target * eased, grouped) + suffix;
+          if (progress < 1) {
+            requestAnimationFrame(step);
+          } else {
+            el.classList.add('count-done');
+          }
+        }
+        requestAnimationFrame(step);
+      }, delay);
+    }
+
+    var countObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (!entry.isIntersecting) return;
+        countObserver.unobserve(entry.target);
+        var nums = Array.prototype.slice.call(entry.target.querySelectorAll('.num[data-count-to]'));
+        nums.forEach(function(el, i) { animate(el, i * 140); });
+      });
+    }, { threshold: 0.35 });
+
+    countObserver.observe(grid);
   })();
 
   document.querySelectorAll('.faq-q').forEach(function(q) {
