@@ -596,6 +596,54 @@
       }
     }
 
+    /* --- Hero weeks: staggered entrance + roaming spotlight --- */
+
+    .hero-week {
+      position: relative;
+      transition:
+        opacity 0.55s ease,
+        transform 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+        border-color 0.55s ease,
+        box-shadow 0.55s ease,
+        background 0.55s ease;
+    }
+
+    .hero-week span {
+      transition: color 0.55s ease;
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+      .hero-weeks.will-animate .hero-week {
+        opacity: 0;
+        transform: translateY(20px) scale(0.97);
+      }
+
+      .hero-weeks.will-animate.entered .hero-week {
+        opacity: 1;
+        transform: none;
+        transition-delay: calc(var(--week-i, 0) * 150ms);
+      }
+    }
+
+    .hero-weeks.spotlighting .hero-week {
+      opacity: 0.55;
+    }
+
+    .hero-weeks.spotlighting .hero-week.spot {
+      opacity: 1;
+      transform: translateY(-5px) scale(1.02);
+      border-color: rgba(124, 58, 237, 0.42);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(243, 238, 252, 0.92));
+      box-shadow:
+        0 0 0 1px rgba(124, 58, 237, 0.16),
+        0 6px 22px -6px rgba(124, 58, 237, 0.35),
+        0 22px 60px -18px rgba(124, 58, 237, 0.45);
+    }
+
+    .hero-weeks.spotlighting .hero-week.spot span {
+      color: rgba(109, 40, 217, 0.85);
+    }
+
     @keyframes clawdBackflip {
       0% { transform: translateY(0) rotate(0deg); }
       50% { transform: translateY(-34px) rotate(-180deg); }
@@ -4179,6 +4227,69 @@
     window.addEventListener('scroll', update, { passive: true });
     window.addEventListener('resize', function() { buildPath(); update(); });
     window.addEventListener('load', function() { buildPath(); update(); });
+  })();
+
+  (function() {
+    var wrap = document.querySelector('.hero-weeks');
+    if (!wrap) return;
+    if (!('IntersectionObserver' in window) || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    var weeks = Array.prototype.slice.call(wrap.querySelectorAll('.hero-week'));
+    if (!weeks.length) return;
+
+    wrap.classList.add('will-animate');
+    weeks.forEach(function(w, i) { w.style.setProperty('--week-i', i); });
+
+    var cycleTimer = null;
+    var current = -1;
+    var entered = false;
+    var hovered = false;
+
+    function spotlightNext() {
+      current = (current + 1) % weeks.length;
+      weeks.forEach(function(w, i) { w.classList.toggle('spot', i === current); });
+    }
+
+    function startCycle() {
+      if (cycleTimer || hovered) return;
+      wrap.classList.add('spotlighting');
+      spotlightNext();
+      cycleTimer = setInterval(spotlightNext, 2400);
+    }
+
+    function stopCycle() {
+      if (!cycleTimer) return;
+      clearInterval(cycleTimer);
+      cycleTimer = null;
+      wrap.classList.remove('spotlighting');
+      weeks.forEach(function(w) { w.classList.remove('spot'); });
+    }
+
+    // pause while the reader explores on their own
+    wrap.addEventListener('mouseenter', function() { hovered = true; stopCycle(); });
+    wrap.addEventListener('mouseleave', function() { hovered = false; startCycle(); });
+
+    var weekObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          if (!entered) {
+            entered = true;
+            wrap.classList.add('entered');
+            // hand over to the spotlight once the entrance finishes
+            setTimeout(function() {
+              wrap.classList.remove('will-animate', 'entered');
+              startCycle();
+            }, weeks.length * 150 + 750);
+          } else {
+            startCycle();
+          }
+        } else {
+          stopCycle();
+        }
+      });
+    }, { threshold: 0.4 });
+
+    weekObserver.observe(wrap);
   })();
 
   document.querySelectorAll('.faq-q').forEach(function(q) {
