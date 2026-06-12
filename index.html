@@ -684,25 +684,13 @@
       animation: gallop 0.45s ease-in-out infinite;
     }
 
-    .clawd-horse {
-      position: absolute;
-      left: 0;
-      bottom: 0;
-      width: 72px;
-      height: 60px;
-    }
-
-    .rider-head {
+    .clawd-avatar {
       position: absolute;
       left: 50%;
-      top: -10px;
-      margin-left: -16px;
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 2px solid #D97757;
-      box-shadow: 0 2px 8px rgba(20, 20, 19, 0.3);
+      bottom: 6px;
+      margin-left: -28px;
+      width: 56px;
+      height: 35px;
     }
 
     @keyframes gallop {
@@ -3494,26 +3482,17 @@
         <div class="week-rider">
           <div class="rider-flip">
             <div class="rider-bob">
-              <svg class="clawd-horse" viewBox="0 0 72 60">
-                <g stroke="#b85c3f" stroke-width="4" stroke-linecap="round">
-                  <line x1="24" y1="38" x2="20" y2="54"/>
-                  <line x1="32" y1="40" x2="31" y2="55"/>
-                  <line x1="42" y1="40" x2="44" y2="55"/>
-                  <line x1="50" y1="38" x2="55" y2="53"/>
-                </g>
-                <g stroke="#D97757" stroke-width="7" stroke-linecap="round">
-                  <line x1="36" y1="26" x2="36" y2="10"/>
-                  <line x1="36" y1="26" x2="36" y2="42"/>
-                  <line x1="36" y1="26" x2="52" y2="26"/>
-                  <line x1="36" y1="26" x2="20" y2="26"/>
-                  <line x1="36" y1="26" x2="47" y2="15"/>
-                  <line x1="36" y1="26" x2="25" y2="37"/>
-                  <line x1="36" y1="26" x2="47" y2="37"/>
-                  <line x1="36" y1="26" x2="25" y2="15"/>
-                </g>
-                <circle cx="36" cy="26" r="7" fill="#D97757"/>
+              <svg class="clawd-avatar" viewBox="0 0 64 40" shape-rendering="crispEdges">
+                <rect x="12" y="0" width="40" height="24" fill="#D97757"/>
+                <rect x="4" y="10" width="8" height="10" fill="#D97757"/>
+                <rect x="52" y="10" width="8" height="10" fill="#D97757"/>
+                <rect x="20" y="6" width="4" height="8" fill="#141413"/>
+                <rect x="40" y="6" width="4" height="8" fill="#141413"/>
+                <rect x="16" y="24" width="4" height="10" fill="#D97757"/>
+                <rect x="24" y="24" width="4" height="10" fill="#D97757"/>
+                <rect x="36" y="24" width="4" height="10" fill="#D97757"/>
+                <rect x="44" y="24" width="4" height="10" fill="#D97757"/>
               </svg>
-              <img class="rider-head" src="assets/ole-headshot.jpg" alt="">
             </div>
           </div>
         </div>
@@ -4232,7 +4211,7 @@
           bottom: { x: centerX, y: r.top - gridRect.top + r.height }
         };
       });
-      var start = { x: cardZones[0].x, y: cardZones[0].top.y - 110 };
+      var start = { x: cardZones[0].x, y: cardZones[0].top.y - 70 };
       // route = the full ride (used to position the rider, never drawn);
       // gaps = only the dotted segments visible between cards
       var route = 'M' + start.x + ',' + start.y + curveTo(start, cardZones[0].top);
@@ -4260,7 +4239,7 @@
       var point = routePath.getPointAtLength(pathLength * progress);
       rider.style.left = point.x + 'px';
       rider.style.top = point.y + 'px';
-      rider.classList.add('on-path');
+      rider.classList.toggle('on-path', progress > 0.02);
       if (Math.abs(point.x - lastX) > 0.5) {
         rider.classList.toggle('flip', point.x < lastX);
         lastX = point.x;
