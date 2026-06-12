@@ -1937,7 +1937,7 @@
       --glow: 0 24px 90px rgba(76, 29, 149, 0.12);
     }
 
-    html { background: var(--paper); scroll-padding-top: 96px; }
+    html { background: var(--paper); scroll-padding-top: 32px; }
 
     body {
       background: transparent;
@@ -2003,7 +2003,7 @@
       left: 0;
       right: 0;
       z-index: 50;
-      display: grid;
+      display: none;
       grid-template-columns: 1fr auto 1fr;
       align-items: center;
       padding: 16px 40px;
@@ -2112,7 +2112,7 @@
       align-items: center;
       max-width: 1040px;
       min-height: auto;
-      padding: 132px 24px 0;
+      padding: 86px 24px 0;
       margin: 0 auto;
       text-align: center;
     }
@@ -2567,11 +2567,23 @@
     .mentor-section .copy,
     .guarantee .copy,
     section:not(.hero):not(.proof-strip) .container-narrow > .copy {
-      padding: 34px;
-      border: 1px solid rgba(76,29,149,0.12);
-      border-radius: 28px;
-      background: rgba(255,255,255,0.78);
-      box-shadow: 0 18px 70px rgba(76,29,149,0.06);
+      padding: 0;
+      border: 0;
+      border-radius: 0;
+      background: transparent;
+      box-shadow: none;
+    }
+
+    .bonus-section .copy,
+    .bonus-section .copy p,
+    .mentor-section .copy,
+    .mentor-section .copy p {
+      color: rgba(255, 255, 255, 0.72);
+    }
+
+    .bonus-section .copy strong,
+    .mentor-section .copy strong {
+      color: #fff;
     }
 
     .ole-portrait {
@@ -2714,9 +2726,10 @@
     }
 
     .price-section .container-narrow > .copy {
-      border-color: rgba(76,29,149,0.12);
-      background: rgba(255,255,255,0.78);
-      box-shadow: 0 18px 70px rgba(76,29,149,0.07);
+      padding: 0;
+      border: 0;
+      background: transparent;
+      box-shadow: none;
     }
 
     .price-box {
@@ -2815,7 +2828,7 @@
       }
 
       .hero-inner {
-        padding-top: 104px;
+        padding-top: 72px;
         padding-bottom: 26px;
       }
 
@@ -2878,7 +2891,7 @@
       .mentor-section .copy,
       .guarantee .copy,
       section:not(.hero):not(.proof-strip) .container-narrow > .copy {
-        padding: 24px;
+        padding: 0;
       }
 
       .price-section {
@@ -2946,18 +2959,6 @@
 <body>
 
 <section class="hero">
-  <header class="experiment-nav" aria-label="Main navigation">
-    <a class="experiment-brand" href="#">
-      <span>Claude Code Marketing MBA</span>
-    </a>
-    <nav class="experiment-nav-links" aria-label="Page sections">
-      <a href="#program">Program</a>
-      <a href="#get-access">Pricing</a>
-      <a href="#proof">Proof</a>
-      <a href="#faq">FAQ</a>
-      <a class="nav-cta" href="#get-access">Join</a>
-    </nav>
-  </header>
   <div class="hero-inner">
     <span class="tag"><span class="dot"></span><span class="tag-text">For non-technical founders and creators who want a full marketing team for a fraction of the cost:</span></span>
     <h1>Go from overwhelmed by Claude Code to owning a team of <span class="accent">AI agents that run your marketing</span> (no technical ability required).</h1>
