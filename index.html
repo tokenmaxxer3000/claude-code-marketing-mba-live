@@ -561,6 +561,137 @@
       transform: translate(-50%, -50%);
     }
 
+    /* --- Week journey: houses, trail, rider --- */
+
+    .chapter-grid {
+      position: relative;
+    }
+
+    .week-journey {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .journey-trail {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+    }
+
+    .journey-trail path {
+      stroke: rgba(20, 20, 19, 0.28);
+      stroke-width: 3;
+      stroke-linecap: round;
+      stroke-dasharray: 1 10;
+    }
+
+    .chapter-grid .chapter .num {
+      position: relative;
+      overflow: visible;
+      width: 72px;
+      height: 62px;
+      display: grid;
+      place-items: center;
+      padding: 0 0 18px;
+      background: #141413;
+      border-radius: 8px;
+      color: #ffffff;
+      font-size: 26px;
+      line-height: 1;
+      margin: 14px 0 12px;
+    }
+
+    /* roof */
+    .chapter-grid .chapter .num::before {
+      content: "";
+      position: absolute;
+      top: -17px;
+      left: 50%;
+      transform: translateX(-50%);
+      border-left: 44px solid transparent;
+      border-right: 44px solid transparent;
+      border-bottom: 19px solid #141413;
+    }
+
+    /* door */
+    .chapter-grid .chapter .num::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      margin-left: -9px;
+      width: 18px;
+      height: 22px;
+      background: var(--amethyst);
+      border-radius: 9px 9px 0 0;
+      transform-origin: left bottom;
+      transition: transform 0.35s ease;
+    }
+
+    .chapter.door-open .num::after {
+      transform: perspective(80px) rotateY(-72deg);
+    }
+
+    .week-rider {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 0;
+      height: 0;
+      visibility: hidden;
+      transition: opacity 0.25s ease;
+    }
+
+    .week-rider.on-path { visibility: visible; }
+    .week-rider.inside { opacity: 0; }
+
+    .rider-flip {
+      position: absolute;
+      left: -36px;
+      top: -64px;
+      width: 72px;
+      height: 66px;
+    }
+
+    .week-rider.flip .rider-flip { transform: scaleX(-1); }
+
+    .rider-bob {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      animation: gallop 0.45s ease-in-out infinite;
+    }
+
+    .clawd-horse {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 72px;
+      height: 60px;
+    }
+
+    .rider-head {
+      position: absolute;
+      left: 50%;
+      top: -10px;
+      margin-left: -16px;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #D97757;
+      box-shadow: 0 2px 8px rgba(20, 20, 19, 0.3);
+    }
+
+    @keyframes gallop {
+      0%, 100% { transform: translateY(0) rotate(-2.5deg); }
+      50% { transform: translateY(-5px) rotate(2.5deg); }
+    }
+
     .proof-item .label {
       display: block;
       color: var(--muted);
@@ -3340,6 +3471,35 @@
     </div>
 
     <div class="chapter-grid">
+      <div class="week-journey" aria-hidden="true">
+        <svg class="journey-trail" preserveAspectRatio="none"><path fill="none"/></svg>
+        <div class="week-rider">
+          <div class="rider-flip">
+            <div class="rider-bob">
+              <svg class="clawd-horse" viewBox="0 0 72 60">
+                <g stroke="#b85c3f" stroke-width="4" stroke-linecap="round">
+                  <line x1="24" y1="38" x2="20" y2="54"/>
+                  <line x1="32" y1="40" x2="31" y2="55"/>
+                  <line x1="42" y1="40" x2="44" y2="55"/>
+                  <line x1="50" y1="38" x2="55" y2="53"/>
+                </g>
+                <g stroke="#D97757" stroke-width="7" stroke-linecap="round">
+                  <line x1="36" y1="26" x2="36" y2="10"/>
+                  <line x1="36" y1="26" x2="36" y2="42"/>
+                  <line x1="36" y1="26" x2="52" y2="26"/>
+                  <line x1="36" y1="26" x2="20" y2="26"/>
+                  <line x1="36" y1="26" x2="47" y2="15"/>
+                  <line x1="36" y1="26" x2="25" y2="37"/>
+                  <line x1="36" y1="26" x2="47" y2="37"/>
+                  <line x1="36" y1="26" x2="25" y2="15"/>
+                </g>
+                <circle cx="36" cy="26" r="7" fill="#D97757"/>
+              </svg>
+              <img class="rider-head" src="assets/ole-headshot.jpg" alt="">
+            </div>
+          </div>
+        </div>
+      </div>
       <div class="chapter">
         <div class="num">01</div>
         <div>
@@ -4017,6 +4177,79 @@
     }, { threshold: 0.35 });
 
     countObserver.observe(grid);
+  })();
+
+  (function() {
+    var grid = document.querySelector('.chapter-grid');
+    var journey = document.querySelector('.week-journey');
+    if (!grid || !journey) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      journey.style.display = 'none'; // houses stay, the ride is decorative
+      return;
+    }
+
+    var chapters = Array.prototype.slice.call(grid.querySelectorAll('.chapter'));
+    var trail = journey.querySelector('.journey-trail');
+    var trailPath = trail.querySelector('path');
+    var rider = journey.querySelector('.week-rider');
+    var pathLength = 0;
+    var doorPoints = [];
+    var lastX = 0;
+
+    function buildPath() {
+      var gridRect = grid.getBoundingClientRect();
+      trail.setAttribute('viewBox', '0 0 ' + gridRect.width + ' ' + gridRect.height);
+      doorPoints = chapters.map(function(ch) {
+        var num = ch.querySelector('.num');
+        var r = num.getBoundingClientRect();
+        return {
+          x: r.left - gridRect.left + r.width / 2,
+          y: r.top - gridRect.top + r.height + 8
+        };
+      });
+      var points = [{ x: doorPoints[0].x - 90, y: -50 }].concat(doorPoints);
+      var d = 'M' + points[0].x + ',' + points[0].y;
+      for (var i = 1; i < points.length; i++) {
+        var prev = points[i - 1];
+        var next = points[i];
+        var midX = (prev.x + next.x) / 2;
+        d += ' C' + midX + ',' + prev.y + ' ' + midX + ',' + next.y + ' ' + next.x + ',' + next.y;
+      }
+      trailPath.setAttribute('d', d);
+      pathLength = trailPath.getTotalLength();
+    }
+
+    function update() {
+      if (!pathLength) return;
+      var gridRect = grid.getBoundingClientRect();
+      var vh = window.innerHeight;
+      var progress = (vh * 0.8 - gridRect.top) / (gridRect.height + vh * 0.35);
+      progress = Math.max(0, Math.min(1, progress));
+      var point = trailPath.getPointAtLength(pathLength * progress);
+      rider.style.left = point.x + 'px';
+      rider.style.top = point.y + 'px';
+      rider.classList.add('on-path');
+      if (Math.abs(point.x - lastX) > 0.5) {
+        rider.classList.toggle('flip', point.x < lastX);
+        lastX = point.x;
+      }
+      var inside = false;
+      chapters.forEach(function(ch, i) {
+        var dp = doorPoints[i];
+        var dx = point.x - dp.x;
+        var dy = point.y - dp.y;
+        var dist = Math.sqrt(dx * dx + dy * dy);
+        ch.classList.toggle('door-open', dist < 95);
+        if (dist < 28) inside = true;
+      });
+      rider.classList.toggle('inside', inside);
+    }
+
+    buildPath();
+    update();
+    window.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', function() { buildPath(); update(); });
+    window.addEventListener('load', function() { buildPath(); update(); });
   })();
 
   document.querySelectorAll('.faq-q').forEach(function(q) {
