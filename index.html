@@ -618,9 +618,9 @@
       transform: translateY(24px) scale(0.97);
     }
 
-    /* already appeared, attention has moved on */
+    /* already appeared: stays comfortably readable, just calmer than the spotlight */
     .hero-week.seen {
-      opacity: 0.74;
+      opacity: 0.92;
     }
 
     /* the card currently arriving */
@@ -4235,7 +4235,7 @@
     function update() {
       var rect = wrap.getBoundingClientRect();
       var vh = window.innerHeight;
-      var progress = (vh * 0.9 - rect.top) / (rect.height + vh * 0.45);
+      var progress = (vh * 0.92 - rect.top) / (rect.height + vh * 0.6);
       progress = Math.max(0, Math.min(1, progress));
       // 0..weeks.length cards revealed; the newest one carries the spotlight
       var revealed = Math.min(weeks.length, Math.floor(progress * (weeks.length + 1)));
