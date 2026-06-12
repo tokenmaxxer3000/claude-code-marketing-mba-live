@@ -534,7 +534,69 @@
       animation: numSettle 0.5s cubic-bezier(0.22, 1, 0.36, 1);
     }
 
-    /* --- Hero weeks: scroll-driven reveal with roaming spotlight --- */
+    /* --- Week journey: trail and rider --- */
+
+    .chapter-grid {
+      position: relative;
+    }
+
+    .week-journey {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .journey-trail {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+    }
+
+    .journey-trail .trail-gaps {
+      stroke: rgba(20, 20, 19, 0.32);
+      stroke-width: 3;
+      stroke-linecap: round;
+      stroke-dasharray: 1 10;
+    }
+
+    .journey-trail .trail-route {
+      stroke: none;
+    }
+
+    /* zigzag layout: one card per row, alternating sides */
+    #program .chapter-grid {
+      grid-template-columns: 1fr;
+      gap: 90px;
+      margin-top: 96px;
+    }
+
+    #program .chapter {
+      width: min(620px, 100%);
+    }
+
+    /* .week-journey is child 1, so chapters are children 2-5 */
+    #program .chapter:nth-child(even) { margin-right: auto; }
+    #program .chapter:nth-child(odd) { margin-left: auto; }
+
+    /* weeks fade in properly on scroll */
+    @media (prefers-reduced-motion: no-preference) {
+      #program .chapter[data-reveal] {
+        opacity: 0;
+        transform: translateY(36px);
+        transition: opacity 650ms ease, transform 650ms cubic-bezier(0.22, 1, 0.36, 1);
+        transition-delay: var(--reveal-delay, 0ms);
+      }
+
+      #program .chapter[data-reveal].is-visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* --- Hero weeks: staggered entrance + roaming spotlight --- */
 
     .hero-week {
       position: relative;
@@ -575,6 +637,60 @@
 
     .hero-week.spot span {
       color: rgba(109, 40, 217, 0.85);
+    }
+
+    @keyframes clawdBackflip {
+      0% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-34px) rotate(-180deg); }
+      100% { transform: translateY(0) rotate(-360deg); }
+    }
+
+    .week-rider.backflip .rider-bob {
+      animation: clawdBackflip 0.8s cubic-bezier(0.34, 1.3, 0.45, 1);
+    }
+
+    .week-rider {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 0;
+      height: 0;
+      visibility: hidden;
+      transition: opacity 0.25s ease;
+    }
+
+    .week-rider.on-path { visibility: visible; }
+    .week-rider.inside { opacity: 0; }
+
+    .rider-flip {
+      position: absolute;
+      left: -36px;
+      top: -64px;
+      width: 72px;
+      height: 66px;
+    }
+
+    .week-rider.flip .rider-flip { transform: scaleX(-1); }
+
+    .rider-bob {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      animation: gallop 0.45s ease-in-out infinite;
+    }
+
+    .clawd-avatar {
+      position: absolute;
+      left: 50%;
+      bottom: 6px;
+      margin-left: -28px;
+      width: 56px;
+      height: 35px;
+    }
+
+    @keyframes gallop {
+      0%, 100% { transform: translateY(0) rotate(-2.5deg); }
+      50% { transform: translateY(-5px) rotate(2.5deg); }
     }
 
     .proof-item .label {
@@ -3228,7 +3344,7 @@
   <div class="hero-inner">
     <span class="tag"><span class="dot"></span><span class="tag-text">For non-technical founders and creators who want a full marketing team for a fraction of the cost:</span></span>
     <h1>Go from overwhelmed by Claude Code to <span class="accent">owning a team of AI agents that run your marketing</span> (no technical ability required).</h1>
-    <p class="lede">Over four weeks, I'll personally walk you through installing AI agents into the most important parts of your business. We'll build live together every week. By the end, you'll have a team of AI agents that write your content, build your landing pages, and run your funnel, all in your voice. It's the same setup that runs my own marketing behind 10M+ monthly views and $100K+ revenue months.</p>
+    <p class="lede">In just 4 weeks, I'll personally walk you through installing AI agents into the most important parts of your business. This is a live walkthrough, every week, and you'll leave with a team of AI agents that write your content, build your landing pages, and run your funnel, all in your voice. It's the exact same setup that runs my own marketing behind 10M+ monthly views and $100K+ revenue months.</p>
     <div>
       <a href="#get-access" class="btn btn-primary btn-large">Save My Founding Seat</a>
       <span class="btn-meta">Starts June 22 &middot; 40 founding seats</span>
@@ -3239,7 +3355,7 @@
       <div class="dashboard-top">
         <div>
           <div class="dashboard-kicker">Claude Code Marketing MBA</div>
-          <div class="dashboard-title">Your AI marketing team <em>built in four weeks.</em></div>
+          <div class="dashboard-title">Your AI marketing team <em>installed in four weeks.</em></div>
         </div>
         <div class="dashboard-pill">403+ alumni &middot; 0 code required</div>
       </div>
@@ -3277,11 +3393,11 @@
       <p><strong>But very few of them actually have the results to back it up.</strong></p>
       <p>So maybe you tried following their setups and hit a wall, or maybe you haven't started because you don't know where to begin.</p>
       <p><strong>That's exactly why I built this.</strong></p>
-      <p>I'm non-technical, and AI is built into 100% of my marketing.</p>
+      <p>I'm non-technical, and AI is infused into 100% of my marketing.</p>
       <p>It does about 90% of the work, and I provide the taste, the judgment, and the direction.</p>
       <p>I'm the architect, AI is the construction crew, and the hours it gives back are hours I get to spend with my son.</p>
-      <p>Over the four-week cohort, I'll help you build the same kind of system inside your business.</p>
-      <p>Once it's built, all you'll need to run it is a single $100 Claude Max subscription (yep, that's the whole running cost), and you'll never touch a line of code.</p>
+      <p>Over the next four weeks, I'll help you build the exact same thing.</p>
+      <p>All you'll need to run it is a single $100 Claude Max subscription (yep, that's the whole running cost), and you'll never touch a line of code.</p>
       <p><strong>The cohort starts June 22, and I may not run it again for the foreseeable future.</strong></p>
       <p><strong>First, let me tell you how I stumbled into it.</strong></p>
     </div>
@@ -3296,7 +3412,7 @@
       <h2 class="heading-lg">Hey, I'm Ole.</h2>
     </div>
     <div class="copy">
-      <p class="lead">I've built a seven-figure personal brand, and AI now runs through every part of my business. I'm still about as technical as a potato.</p>
+      <p class="lead">I've built a seven-figure personal brand, and I have AI installed in every part of my business, as a guy who's about as technical as a potato.</p>
       <p><strong>Last year, getting there felt impossible.</strong></p>
       <p>I tried to get Claude running for my marketing four separate times, and every attempt made me feel like a complete donkey.</p>
       <p>I'd find a YouTube tutorial, follow every step, and then the guy would casually say something that made my brain go totally blank.</p>
@@ -3309,8 +3425,7 @@
       <p>I put my son to bed, kicked off a task before dinner, ran outside to wrestle our patio furniture away from the pool in the wind, and came back to three finished landing pages.</p>
       <p><strong>Competitor research done, design studied, copy written in my actual voice.</strong></p>
       <p><strong>Eight minutes, zero code.</strong></p>
-      <p>So I started building more of these simple skills and installing them into the most important parts of my business.</p>
-      <p>My content went out faster, my pages shipped in an afternoon, and the funnel started running without me.</p>
+      <p>So I started building more of these simple skills and installing them into the most important parts of my business, and my content went out faster, my pages shipped in an afternoon, and the funnel started running without me.</p>
       <p>The results since then: 10M+ monthly views, $100K+ revenue months, and a business on track for seven figures this year, with AI running underneath all of it.</p>
       <p>Then friends started asking how, so I worked closely with them to set it up too.</p>
       <p>That grew into two workshops, where 400+ non-technical founders and creators learned the system and rated it 4.8 out of 5 stars.</p>
@@ -3340,12 +3455,32 @@
     </div>
 
     <div class="chapter-grid">
+      <div class="week-journey" aria-hidden="true">
+        <svg class="journey-trail" preserveAspectRatio="none"><path class="trail-gaps" fill="none"/><path class="trail-route" fill="none"/></svg>
+        <div class="week-rider">
+          <div class="rider-flip">
+            <div class="rider-bob">
+              <svg class="clawd-avatar" viewBox="0 0 64 40" shape-rendering="crispEdges">
+                <rect x="12" y="0" width="40" height="24" fill="#D97757"/>
+                <rect x="4" y="10" width="8" height="10" fill="#D97757"/>
+                <rect x="52" y="10" width="8" height="10" fill="#D97757"/>
+                <rect x="20" y="6" width="4" height="8" fill="#141413"/>
+                <rect x="40" y="6" width="4" height="8" fill="#141413"/>
+                <rect x="16" y="24" width="4" height="10" fill="#D97757"/>
+                <rect x="24" y="24" width="4" height="10" fill="#D97757"/>
+                <rect x="36" y="24" width="4" height="10" fill="#D97757"/>
+                <rect x="44" y="24" width="4" height="10" fill="#D97757"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
       <div class="chapter">
         <div class="num">01</div>
         <div>
           <h3>Week 1: Make Claude sound, feel, and behave like you</h3>
           <ul>
-            <li>Set up Claude Code from scratch with me on the live call, even if you've never installed anything like this before</li>
+            <li>Set up Claude Code from scratch with me on the call, even if you've never installed anything like this before</li>
             <li>Build your CLAUDE.md so every agent knows how you sound, who you're talking to, and what you sell</li>
             <li>Connect Claude to the tools you already work in, so it lives inside the business you actually run</li>
             <li>So you can get output that sounds exactly like you, with no generic AI slop to rewrite.</li>
@@ -3372,9 +3507,9 @@
           <h3>Week 3: Build your funnel</h3>
           <ul>
             <li>Write and publish a lead magnet that pulls in the right people</li>
-            <li>Build and publish a landing page on your own domain, styled like any site you admire</li>
+            <li>Build a landing page live on your own domain, styled like any site you admire</li>
             <li>Draft a welcome email sequence that follows up and sells for you automatically</li>
-            <li>So you have something collecting real emails before the next session.</li>
+            <li>So you can have something collecting real emails by next week.</li>
           </ul>
         </div>
       </div>
@@ -3387,7 +3522,7 @@
             <li>Build a research agent that reads your niche every morning and tells you what to post.</li>
             <li>Set up a weekly report that shows which posts are actually working</li>
             <li>Learn to turn any repeatable task into its own Claude Code workflow.</li>
-            <li>So the engine can run without you starting from scratch every week. On Monday, you read the report, click a couple of buttons, and move on.</li>
+            <li>So the engine runs itself, and you spend five minutes on a Monday morning reading the report and clicking a couple of buttons. Everything else just happens.</li>
           </ul>
         </div>
       </div>
@@ -3402,7 +3537,7 @@
 <section class="included outcome-section">
   <div class="container">
     <div class="head">
-      <h2 class="heading-lg">By the end, you have a working AI marketing team running for you, at almost no cost.</h2>
+      <h2 class="heading-lg">By the end, you have a full marketing team running for you, at almost no cost.</h2>
       <p class="intro">You walk away owning a working system that's already up and running.</p>
     </div>
 
@@ -3413,7 +3548,7 @@
       <li><strong>A morning research agent</strong>Reads your niche and hands you what to post, so you never fry your brain doomscrolling for ideas again.</li>
       <li><strong>A weekly report</strong>Shows which posts landed, so you always know what to make more of.</li>
       <li><strong>A lead magnet, freebie page, and welcome sequence</strong>Turns the emails you collect into buyers who love your brand.</li>
-      <li><strong>A landing page published on your own domain</strong>Built to match a look you love.</li>
+      <li><strong>A landing page live on your own domain</strong>Built to match a look you love.</li>
       <li><strong>Social graphics and post images</strong>Ready to regenerate any time in your brand colors and style, no designer in the loop.</li>
     </ul>
     <div class="container-narrow">
@@ -3422,7 +3557,7 @@
         <p>AI handles the research, the drafts, and the boring work.</p>
         <p>More of your content is landing, more customers are coming through, and you finally have the time to focus on the part of the business only you can do.</p>
         <p>And because this isn't a pile of templates that goes stale with the next AI update, the system keeps building itself as you get better with AI.</p>
-        <p>Underneath all of it, you're learning how to direct AI agents yourself, so the system keeps getting better after the cohort ends.</p>
+        <p>Underneath all of it, you're learning to orchestrate AI agents, the most valuable skill of the next decade.</p>
       </div>
     </div>
   </div>
@@ -3431,13 +3566,13 @@
 <section class="skills bonus-section">
   <div class="container-narrow">
     <div class="head">
-      <h2 class="heading-lg">Bonus: every Claude Code Skill I use, installed on day one.</h2>
-      <p class="intro">When you invest in this first round, I'm handing you every Claude Code Skill that runs my own marketing: landing pages, sales copy, newsletters, viral hooks, content repurposing, and more.</p>
+      <h2 class="heading-lg">Bonus: every Skill I use, installed on day one.</h2>
+      <p class="intro">When you invest in this first round, I'm handing you every single Skill that runs my own marketing: landing pages, sales copy, newsletters, viral hooks, content repurposing, and more.</p>
     </div>
 
     <div class="copy">
       <p>You don't have to build any of them yourself.</p>
-      <p>You copy-paste them into your setup, and they work from day one.</p>
+      <p>You copy-paste them in, and they work from day one.</p>
       <p>I built this library over hundreds of hours for my own seven-figure business, so this alone saves you months of trial and error.</p>
     </div>
   </div>
@@ -3451,7 +3586,7 @@
       <p>What you get is someone who's already done it, over and over, and knows how to teach it to people who don't speak engineer.</p>
       <p>I've helped 400+ non-technical founders and creators install AI into their businesses.</p>
       <p>I've worked with 8-figure companies, spoken about AI at Google I/O, and broken these systems down on This Week in Startups.</p>
-      <p>This is the first time you can build the whole thing directly with me during a four-week cohort.</p>
+      <p>This is the first time you can get the whole thing directly from me, built alongside you, in four weeks.</p>
     </div>
   </div>
 </section>
@@ -3562,7 +3697,7 @@
       <p>And the money is the easy part.</p>
       <p>You have to find them, vet them, train them, chase the invoices, and coordinate everyone's schedules just to ship one campaign.</p>
       <p>The day one of them quits, the whole thing stops.</p>
-      <p><strong>Now compare that to this: you build the system once, and it runs on a single $100 Claude Max subscription.</strong></p>
+      <p><strong>Now compare that: you build this system once, and it runs on a single $100 Claude Max subscription.</strong></p>
       <p>None of the messy human overhead.</p>
       <p>It never sleeps, never quits, and it's ready the second you need it.</p>
     </div>
@@ -3576,12 +3711,12 @@
     </div>
     <div class="container-narrow" style="padding-top: 24px;">
       <div class="copy" style="text-align: left;">
-        <p>After this first round, my plan is to run this cohort at $2,000.</p>
-        <p>Considering everything we build together, that's still less than one month of the cheapest hire on the list above.</p>
-        <p>But this is the first founding cohort.</p>
+        <p>My plan is to run this cohort at $2,000.</p>
+        <p>Considering everything we'll build together, that's still less than one month of the cheapest hire on the list above.</p>
+        <p>But this is the first time I'm running it.</p>
         <p>So I'm looking for committed founders who'll share testimonials, feedback, and case studies once they get results.</p>
         <p><strong>If that sounds like you, this invitation is for the Founders Price of $997, one time.</strong></p>
-        <p>The cohort is the same quality.</p>
+        <p>The quality stays exactly the same.</p>
         <p>You just get in for less than half of what every cohort after this one will pay, and I get to spend more direct time with you.</p>
         <p><strong>This price only exists for this launch, and there are only 40 seats.</strong></p>
       </div>
@@ -3589,7 +3724,7 @@
     <div class="price-box">
       <span class="price-tag">Claude Code Marketing MBA</span>
       <div class="price">$997</div>
-      <div class="price-note">One-time payment &middot; 4-week live cohort &middot; 40 founding seats</div>
+      <div class="price-note">One-time payment &middot; 4 weeks live &middot; 40 founding seats</div>
       <a href="#faq" class="btn btn-primary btn-large">Join the cohort</a>
     </div>
   </div>
@@ -3606,7 +3741,7 @@
       <p>So I understand the skepticism.</p>
       <p><strong>I'm not one of them.</strong></p>
       <p>400+ founders have been through my workshops and rated them 4.8 out of 5 stars.</p>
-      <p>So here's the deal: show up, do the work, and if you're anything less than blown away within two weeks, email me and I'll refund every cent.</p>
+      <p>So here's the deal: do the work, and if you're anything less than blown away within two weeks, email me and I'll refund every cent.</p>
       <p><strong>No hoops, no "are you sure you want to leave?" call, no questions asked.</strong></p>
       <p>And you keep everything you've built.</p>
       <p>I'm only looking for people who are serious about building this.</p>
@@ -3635,7 +3770,7 @@
       <h2 class="heading-lg">What's included</h2>
     </div>
     <ul class="source-list">
-      <li><strong>One live session a week</strong>For the four-week cohort, where we teach and build together in real time.</li>
+      <li><strong>One live session a week</strong>For all four weeks, where we teach and build together in real time.</li>
       <li><strong>One office hour a week</strong>To get unstuck on your own setup with eyes on your actual business.</li>
       <li><strong>A private community</strong>Ask questions and keep momentum going between sessions.</li>
       <li><strong>Lifetime access to every recording</strong>Rewatch any session whenever you need it.</li>
@@ -3644,7 +3779,7 @@
     <div class="container-narrow">
       <div class="copy">
         <p>Plan on about two to four hours a week total: one live session, plus one to three hours of your own build time.</p>
-        <p>The first live session starts June 22.</p>
+        <p>Starts June 22.</p>
         <p>All you need is a laptop and a Claude Max subscription.</p>
       </div>
     </div>
@@ -3657,9 +3792,8 @@
       <h2 class="heading-lg">Ready to build it?</h2>
     </div>
     <div class="copy">
-      <p>Four weeks, live, where you build a team of AI agents that runs your marketing, with me walking you through every step.</p>
-      <p>You finish with a working system you own, plus the skill to keep building on it for good.</p>
-      <p>If you're done starting from scratch every time you sit down to market your business, and you want the whole system built by the end of the cohort, this is for you.</p>
+      <p>You've seen the whole thing: four weeks, live, where you build a team of AI agents that runs your marketing in your voice, plus the skill to keep growing it for good.</p>
+      <p>If you're done starting from scratch every time you sit down to market your business, and you want the whole system built and running by the time the cohort ends, this is for you.</p>
       <p>Grab one of the 40 founding seats at $997 before they're gone.</p>
     </div>
     <div class="cta-inline">
@@ -3821,37 +3955,37 @@
     <div class="faq-list">
       <div class="faq-item">
         <div class="faq-q">What is this, exactly?<span class="toggle" aria-hidden="true"></span></div>
-        <div class="faq-a"><div class="faq-a-inner">It's a four-week live cohort where you build a team of AI agents that runs your marketing, with me walking you through every step. You finish with a working system you own, plus the skill to keep building on it for good.</div></div>
+        <div class="faq-a"><div class="faq-a-inner">Four weeks, live, where you build a team of AI agents that runs your marketing, with me walking you through every step. You finish with a working system you own, plus the skill to keep building on it for good.</div></div>
       </div>
 
       <div class="faq-item">
         <div class="faq-q">Won't this be out of date in two months?<span class="toggle" aria-hidden="true"></span></div>
-        <div class="faq-a"><div class="faq-a-inner">It's fair to worry about that. But this is not a pile of templates that breaks the next time the tools update. I'll teach you how to build AI agents and workflows in a simple, repeatable way. When a new platform or tool shows up, you'll know how to build the next workflow yourself.</div></div>
+        <div class="faq-a"><div class="faq-a-inner">It's the reason most people never buy AI products, and it's fair. But I'm not handing you a pile of templates that expire the next time the tools update. I'm teaching you the skill underneath: how to build AI agents and workflows in a simple, repeatable way. So when a new platform or tool shows up, you just build the workflow yourself in an afternoon.</div></div>
       </div>
 
       <div class="faq-item">
         <div class="faq-q">Who's it for?<span class="toggle" aria-hidden="true"></span></div>
-        <div class="faq-a"><div class="faq-a-inner">Non-technical founders and creators who want Claude Code working inside their business without becoming developers first.</div></div>
+        <div class="faq-a"><div class="faq-a-inner">Non-technical founders and creators who want AI working in their business without becoming a developer to get it.</div></div>
       </div>
 
       <div class="faq-item">
         <div class="faq-q">How is this different from a cheaper AI course?<span class="toggle" aria-hidden="true"></span></div>
-        <div class="faq-a"><div class="faq-a-inner">Most AI courses hand you templates and leave you to figure out how they apply to your business. This is built with you, live, using your business. You leave with a working system and the skill to keep building.</div></div>
+        <div class="faq-a"><div class="faq-a-inner">Most AI courses hand you templates and leave you to figure it out alone. This is built with you, live and tailored to your business, and you walk out with a working system plus the skill to keep building. That's what the cheaper courses can't give you.</div></div>
       </div>
 
       <div class="faq-item">
         <div class="faq-q">How soon will I see results?<span class="toggle" aria-hidden="true"></span></div>
-        <div class="faq-a"><div class="faq-a-inner">By the end of week one, Claude is set up and writing in your voice. By the end of week two, your content engine is working. By the end of the cohort, the core system is built and running.</div></div>
+        <div class="faq-a"><div class="faq-a-inner">Fast. By the end of week one, Claude is writing in your voice. By the end of week two, you've got a content engine running and a funnel taking shape. Most of the system is live before the cohort even ends.</div></div>
       </div>
 
       <div class="faq-item">
         <div class="faq-q">Do I need to be technical?<span class="toggle" aria-hidden="true"></span></div>
-        <div class="faq-a"><div class="faq-a-inner">No. Week 1 starts from absolute zero. We set up Claude Code together, click by click, so you do not need anything ready before we start.</div></div>
+        <div class="faq-a"><div class="faq-a-inner">No, and neither am I. Week 1 gets you set up from absolute zero, every click handled together. You need nothing ready before we start.</div></div>
       </div>
 
       <div class="faq-item">
         <div class="faq-q">I work full-time. What's the time commitment?<span class="toggle" aria-hidden="true"></span></div>
-        <div class="faq-a"><div class="faq-a-inner">About two to four hours a week total: one live session, plus one to three hours of build time. If a week gets busy, watch the replay and bring questions to office hours.</div></div>
+        <div class="faq-a"><div class="faq-a-inner">About two to four hours a week: one live hour plus your own build time. Every session is recorded, so if a week gets busy you watch the replay and bring questions to office hours.</div></div>
       </div>
 
       <div class="faq-item">
@@ -3861,12 +3995,12 @@
 
       <div class="faq-item">
         <div class="faq-q">What exactly do I need to start?<span class="toggle" aria-hidden="true"></span></div>
-        <div class="faq-a"><div class="faq-a-inner">A laptop, a Claude Max subscription, and your business. Mac or Windows is fine. We handle setup together in week 1.</div></div>
+        <div class="faq-a"><div class="faq-a-inner">A laptop (Mac or Windows) and a Claude Max subscription. That's it. We handle setup together in week 1.</div></div>
       </div>
 
       <div class="faq-item">
         <div class="faq-q">What if it turns out not to be right for me?<span class="toggle" aria-hidden="true"></span></div>
-        <div class="faq-a"><div class="faq-a-inner">Then Ole's Obviously Awesome Guarantee has you covered. Show up, do the work, and if you're not blown away within two weeks, email me for a full refund. You keep everything you've built.</div></div>
+        <div class="faq-a"><div class="faq-a-inner">Then Ole's Obviously Awesome Guarantee has you covered. Do the work, and if you're not blown away within two weeks, email me for a full refund, and you keep everything you've built.</div></div>
       </div>
 
       <div class="faq-item">
@@ -3876,7 +4010,7 @@
 
       <div class="faq-item">
         <div class="faq-q">Is there a payment plan?<span class="toggle" aria-hidden="true"></span></div>
-        <div class="faq-a"><div class="faq-a-inner">Reach out before the cohort fills and we'll see what we can do.</div></div>
+        <div class="faq-a"><div class="faq-a-inner">Reach out before the cohort fills and we'll sort something out.</div></div>
       </div>
     </div>
 
@@ -3942,7 +4076,7 @@
     var grid = document.querySelector('.proof-grid');
     if (!grid) return;
     if (!('IntersectionObserver' in window) || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      return; // final values are already in the markup
+      return; // final values are already in the markup, curve shows finished state
     }
 
     function format(value, grouped) {
@@ -3986,6 +4120,108 @@
     }, { threshold: 0.35 });
 
     countObserver.observe(grid);
+  })();
+
+  (function() {
+    var grid = document.querySelector('.chapter-grid');
+    var journey = document.querySelector('.week-journey');
+    if (!grid || !journey) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      journey.style.display = 'none'; // houses stay, the ride is decorative
+      return;
+    }
+
+    var chapters = Array.prototype.slice.call(grid.querySelectorAll('.chapter'));
+    var trail = journey.querySelector('.journey-trail');
+    var gapsPath = trail.querySelector('.trail-gaps');
+    var routePath = trail.querySelector('.trail-route');
+    var rider = journey.querySelector('.week-rider');
+    var pathLength = 0;
+    var cardZones = [];
+    var lastX = 0;
+    var lastInsideIndex = -1;
+    var flipping = false;
+
+    function curveTo(from, to) {
+      var midY = (from.y + to.y) / 2;
+      return ' C' + from.x + ',' + midY + ' ' + to.x + ',' + midY + ' ' + to.x + ',' + to.y;
+    }
+
+    function buildPath() {
+      // offsetTop/offsetLeft ignore the fade-in transforms, so the path
+      // is measured against each card's final resting position
+      trail.setAttribute('viewBox', '0 0 ' + grid.offsetWidth + ' ' + grid.offsetHeight);
+      cardZones = chapters.map(function(ch) {
+        var centerX = ch.offsetLeft + ch.offsetWidth / 2;
+        return {
+          x: centerX,
+          top: { x: centerX, y: ch.offsetTop },
+          bottom: { x: centerX, y: ch.offsetTop + ch.offsetHeight }
+        };
+      });
+      var EDGE = 16; // dotted line always stops this far from a card
+      var start = { x: cardZones[0].x, y: cardZones[0].top.y - 70 };
+      // route = the full ride (used to position the rider, never drawn);
+      // gaps = only the dotted segments visible between cards
+      var route = 'M' + start.x + ',' + start.y + curveTo(start, cardZones[0].top);
+      var entryEnd = { x: cardZones[0].top.x, y: cardZones[0].top.y - EDGE };
+      var gaps = 'M' + start.x + ',' + start.y + curveTo(start, entryEnd);
+      for (var i = 0; i < cardZones.length; i++) {
+        var zone = cardZones[i];
+        route += ' L' + zone.bottom.x + ',' + zone.bottom.y;
+        if (i < cardZones.length - 1) {
+          var nextTop = cardZones[i + 1].top;
+          route += curveTo(zone.bottom, nextTop);
+          var gapFrom = { x: zone.bottom.x, y: zone.bottom.y + EDGE };
+          var gapTo = { x: nextTop.x, y: nextTop.y - EDGE };
+          gaps += ' M' + gapFrom.x + ',' + gapFrom.y + curveTo(gapFrom, gapTo);
+        }
+      }
+      routePath.setAttribute('d', route);
+      gapsPath.setAttribute('d', gaps);
+      pathLength = routePath.getTotalLength();
+    }
+
+    function update() {
+      if (!pathLength) return;
+      var gridRect = grid.getBoundingClientRect();
+      var vh = window.innerHeight;
+      var progress = (vh * 0.8 - gridRect.top) / (gridRect.height + vh * 0.35);
+      progress = Math.max(0, Math.min(1, progress));
+      var point = routePath.getPointAtLength(pathLength * progress);
+      rider.style.left = point.x + 'px';
+      rider.style.top = point.y + 'px';
+      rider.classList.toggle('on-path', progress > 0.02);
+      if (Math.abs(point.x - lastX) > 0.5) {
+        rider.classList.toggle('flip', point.x < lastX);
+        lastX = point.x;
+      }
+      var insideIndex = -1;
+      for (var i = 0; i < cardZones.length; i++) {
+        var zone = cardZones[i];
+        if (point.y > zone.top.y + 12 && point.y < zone.bottom.y - 12 && Math.abs(point.x - zone.x) < 60) {
+          insideIndex = i;
+          break;
+        }
+      }
+      // backflip when he comes out the bottom of week 3
+      if (lastInsideIndex === 2 && insideIndex === -1 && point.y >= cardZones[2].bottom.y - 12 && !flipping) {
+        flipping = true;
+        rider.classList.add('backflip');
+        setTimeout(function() {
+          rider.classList.remove('backflip');
+          flipping = false;
+        }, 820);
+      }
+      lastInsideIndex = insideIndex;
+      rider.classList.toggle('inside', insideIndex !== -1);
+    }
+
+    buildPath();
+    update();
+    window.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', function() { buildPath(); update(); });
+    window.addEventListener('load', function() { buildPath(); update(); });
   })();
 
   (function() {
