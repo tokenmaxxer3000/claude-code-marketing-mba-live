@@ -534,6 +534,49 @@
       animation: numSettle 0.5s cubic-bezier(0.22, 1, 0.36, 1);
     }
 
+    /* --- Hero weeks: scroll-driven reveal with roaming spotlight --- */
+
+    .hero-week {
+      position: relative;
+      transition:
+        opacity 0.55s ease,
+        transform 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+        border-color 0.55s ease,
+        box-shadow 0.55s ease,
+        background 0.55s ease;
+    }
+
+    .hero-week span {
+      transition: color 0.55s ease;
+    }
+
+    /* not yet reached while scrolling */
+    .hero-week.pending {
+      opacity: 0;
+      transform: translateY(24px) scale(0.97);
+    }
+
+    /* already appeared: stays comfortably readable, just calmer than the spotlight */
+    .hero-week.seen {
+      opacity: 0.92;
+    }
+
+    /* the card currently arriving */
+    .hero-week.spot {
+      opacity: 1;
+      transform: translateY(-5px) scale(1.02);
+      border-color: rgba(124, 58, 237, 0.42);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(243, 238, 252, 0.92));
+      box-shadow:
+        0 0 0 1px rgba(124, 58, 237, 0.16),
+        0 6px 22px -6px rgba(124, 58, 237, 0.35),
+        0 22px 60px -18px rgba(124, 58, 237, 0.45);
+    }
+
+    .hero-week.spot span {
+      color: rgba(109, 40, 217, 0.85);
+    }
+
     .proof-item .label {
       display: block;
       color: var(--muted);
@@ -3943,6 +3986,34 @@
     }, { threshold: 0.35 });
 
     countObserver.observe(grid);
+  })();
+
+  (function() {
+    var wrap = document.querySelector('.hero-weeks');
+    if (!wrap) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    var weeks = Array.prototype.slice.call(wrap.querySelectorAll('.hero-week'));
+    if (!weeks.length) return;
+
+    function update() {
+      var rect = wrap.getBoundingClientRect();
+      var vh = window.innerHeight;
+      var progress = (vh * 0.92 - rect.top) / (rect.height + vh * 0.6);
+      progress = Math.max(0, Math.min(1, progress));
+      // 0..weeks.length cards revealed; the newest one carries the spotlight
+      var revealed = Math.min(weeks.length, Math.floor(progress * (weeks.length + 1)));
+      var done = progress >= 0.98; // fully scrolled past: everything settles to normal
+      weeks.forEach(function(w, i) {
+        w.classList.toggle('pending', !done && i >= revealed);
+        w.classList.toggle('spot', !done && i === revealed - 1);
+        w.classList.toggle('seen', !done && i < revealed - 1);
+      });
+    }
+
+    update();
+    window.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
   })();
 
   document.querySelectorAll('.faq-q').forEach(function(q) {
