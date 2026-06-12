@@ -596,6 +596,63 @@
       }
     }
 
+    /* --- Liquid glass hero CTA --- */
+
+    .liquid-glass-defs {
+      position: absolute;
+      width: 0;
+      height: 0;
+      overflow: hidden;
+    }
+
+    .btn.btn-liquid {
+      position: relative;
+      isolation: isolate;
+      background: linear-gradient(180deg, rgba(124, 58, 237, 0.62), rgba(109, 40, 217, 0.78));
+      color: var(--white);
+      -webkit-backdrop-filter: blur(6px) saturate(1.35);
+      backdrop-filter: blur(6px) saturate(1.35);
+      box-shadow: none;
+      transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), filter 0.3s ease;
+    }
+
+    @supports (backdrop-filter: url(#liquid-glass)) {
+      .btn.btn-liquid {
+        -webkit-backdrop-filter: url(#liquid-glass);
+        backdrop-filter: url(#liquid-glass);
+      }
+    }
+
+    .btn.btn-liquid:hover {
+      transform: scale(1.045);
+      filter: brightness(1.08);
+    }
+
+    .btn.btn-liquid:active {
+      transform: scale(0.985);
+      filter: brightness(0.94);
+    }
+
+    /* glass rim: layered inset highlights over the purple tint */
+    .btn.btn-liquid::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      border-radius: inherit;
+      pointer-events: none;
+      box-shadow:
+        0 0 6px rgba(0, 0, 0, 0.05),
+        0 2px 10px rgba(76, 29, 149, 0.28),
+        inset 3px 3px 0.5px -3px rgba(255, 255, 255, 0.85),
+        inset -3px -3px 0.5px -3px rgba(255, 255, 255, 0.7),
+        inset 1px 1px 1px -0.5px rgba(255, 255, 255, 0.6),
+        inset -1px -1px 1px -0.5px rgba(255, 255, 255, 0.5),
+        inset 0 0 6px 6px rgba(255, 255, 255, 0.1),
+        inset 0 0 2px 2px rgba(255, 255, 255, 0.08),
+        0 0 18px rgba(124, 58, 237, 0.38);
+    }
+
     /* --- Hero weeks: staggered entrance + roaming spotlight --- */
 
     .hero-week {
@@ -3346,8 +3403,19 @@
     <h1>Go from overwhelmed by Claude Code to <span class="accent">owning a team of AI agents that run your marketing</span> (no technical ability required).</h1>
     <p class="lede">In just 4 weeks, I'll personally walk you through installing AI agents into the most important parts of your business. This is a live walkthrough, every week, and you'll leave with a team of AI agents that write your content, build your landing pages, and run your funnel, all in your voice. It's the exact same setup that runs my own marketing behind 10M+ monthly views and $100K+ revenue months.</p>
     <div>
-      <a href="#get-access" class="btn btn-primary btn-large">Save My Founding Seat</a>
+      <a href="#get-access" class="btn btn-primary btn-large btn-liquid">Save My Founding Seat</a>
       <span class="btn-meta">Starts June 22 &middot; 40 founding seats</span>
+      <svg class="liquid-glass-defs" aria-hidden="true" focusable="false">
+        <defs>
+          <filter id="liquid-glass" x="0%" y="0%" width="100%" height="100%" color-interpolation-filters="sRGB">
+            <feTurbulence type="fractalNoise" baseFrequency="0.05 0.05" numOctaves="1" seed="1" result="turbulence"/>
+            <feGaussianBlur in="turbulence" stdDeviation="2" result="blurredNoise"/>
+            <feDisplacementMap in="SourceGraphic" in2="blurredNoise" scale="28" xChannelSelector="R" yChannelSelector="B" result="displaced"/>
+            <feGaussianBlur in="displaced" stdDeviation="3" result="finalBlur"/>
+            <feComposite in="finalBlur" in2="finalBlur" operator="over"/>
+          </filter>
+        </defs>
+      </svg>
     </div>
   </div>
   <div class="hero-stage" aria-hidden="true">
