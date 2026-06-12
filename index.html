@@ -4105,29 +4105,33 @@
     }
 
     function buildPath() {
-      var gridRect = grid.getBoundingClientRect();
-      trail.setAttribute('viewBox', '0 0 ' + gridRect.width + ' ' + gridRect.height);
+      // offsetTop/offsetLeft ignore the fade-in transforms, so the path
+      // is measured against each card's final resting position
+      trail.setAttribute('viewBox', '0 0 ' + grid.offsetWidth + ' ' + grid.offsetHeight);
       cardZones = chapters.map(function(ch) {
-        var r = ch.getBoundingClientRect();
-        var centerX = r.left - gridRect.left + r.width / 2;
+        var centerX = ch.offsetLeft + ch.offsetWidth / 2;
         return {
           x: centerX,
-          top: { x: centerX, y: r.top - gridRect.top },
-          bottom: { x: centerX, y: r.top - gridRect.top + r.height }
+          top: { x: centerX, y: ch.offsetTop },
+          bottom: { x: centerX, y: ch.offsetTop + ch.offsetHeight }
         };
       });
+      var EDGE = 16; // dotted line always stops this far from a card
       var start = { x: cardZones[0].x, y: cardZones[0].top.y - 70 };
       // route = the full ride (used to position the rider, never drawn);
       // gaps = only the dotted segments visible between cards
       var route = 'M' + start.x + ',' + start.y + curveTo(start, cardZones[0].top);
-      var gaps = 'M' + start.x + ',' + start.y + curveTo(start, cardZones[0].top);
+      var entryEnd = { x: cardZones[0].top.x, y: cardZones[0].top.y - EDGE };
+      var gaps = 'M' + start.x + ',' + start.y + curveTo(start, entryEnd);
       for (var i = 0; i < cardZones.length; i++) {
         var zone = cardZones[i];
         route += ' L' + zone.bottom.x + ',' + zone.bottom.y;
         if (i < cardZones.length - 1) {
           var nextTop = cardZones[i + 1].top;
           route += curveTo(zone.bottom, nextTop);
-          gaps += ' M' + zone.bottom.x + ',' + zone.bottom.y + curveTo(zone.bottom, nextTop);
+          var gapFrom = { x: zone.bottom.x, y: zone.bottom.y + EDGE };
+          var gapTo = { x: nextTop.x, y: nextTop.y - EDGE };
+          gaps += ' M' + gapFrom.x + ',' + gapFrom.y + curveTo(gapFrom, gapTo);
         }
       }
       routePath.setAttribute('d', route);
