@@ -1166,7 +1166,7 @@
       color: var(--lavender);
       font-weight: 700;
       opacity: 0.5;
-      font-family: Georgia, serif;
+      font-family: var(--inter-tight);
     }
 
     .t-quote blockquote {
@@ -1378,7 +1378,7 @@
       --soft: #f1f0ef;
       --line-light: rgba(20, 20, 19, 0.1);
       --inter-tight: 'Inter Tight', var(--font);
-      --serif-accent: 'Playfair Display', Georgia, serif;
+      --serif-accent: var(--inter-tight); /* serif killed — all type is sans */
       --rounded-ui: 'SF Pro Rounded', var(--font);
     }
 
@@ -2090,7 +2090,7 @@
       --line-paper: rgba(198, 97, 63, 0.16);
       --card-paper: rgba(255, 255, 255, 0.62);
       --font: "Poppins", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      --font-serif: "Instrument Serif", Georgia, serif;
+      --font-serif: var(--inter-tight); /* serif killed — all type is sans */
       --amethyst: #c6613f;
       --amethyst-hover: #a84e30;
       --lavender: #d97757;
