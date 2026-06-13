@@ -2625,21 +2625,43 @@
 
     .liquid-wrap .btn.btn-liquid { margin-top: 0; }
 
-    /* clear glass — no colour chip behind it */
-    .liquid-backsplash { display: none; }
+    /* living purple gradient behind the glass — the glass warps this as it animates */
+    .liquid-backsplash {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      border-radius: inherit;
+      background:
+        radial-gradient(circle at 30% 30%, #a855f7 0%, transparent 50%),
+        radial-gradient(circle at 75% 70%, #6d28d9 0%, transparent 50%),
+        linear-gradient(115deg, #4c1d95 0%, #7c3aed 35%, #a855f7 55%, #6d28d9 80%, #4c1d95 100%);
+      background-size: 200% 200%, 200% 200%, 300% 300%;
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+      .liquid-backsplash {
+        animation: liquidShift 7s ease-in-out infinite;
+      }
+    }
+
+    @keyframes liquidShift {
+      0%   { background-position: 0% 50%, 100% 50%, 0% 50%; }
+      50%  { background-position: 100% 50%, 0% 50%, 100% 50%; }
+      100% { background-position: 0% 50%, 100% 50%, 0% 50%; }
+    }
 
     .btn.btn-liquid {
       position: relative;
       z-index: 1;
       isolation: isolate;
-      /* frosted clear glass: faint white translucency, no purple */
+      /* clear glass: light sheen only, so the animated purple gradient shows + warps through */
       background:
-        linear-gradient(180deg, rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0.18) 60%);
-      color: var(--ink);
-      text-shadow: 0 1px 1px rgba(255, 255, 255, 0.5);
-      -webkit-backdrop-filter: blur(10px) saturate(1.1);
-      backdrop-filter: blur(10px) saturate(1.1);
-      box-shadow: 0 18px 50px rgba(20, 20, 19, 0.16);
+        linear-gradient(180deg, rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.04) 50%);
+      color: #fff;
+      text-shadow: 0 1px 3px rgba(30, 8, 70, 0.7);
+      -webkit-backdrop-filter: blur(2px) saturate(1.3);
+      backdrop-filter: blur(2px) saturate(1.3);
+      box-shadow: 0 18px 50px rgba(76, 29, 149, 0.4);
       transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), filter 0.3s ease;
     }
 
@@ -2660,17 +2682,16 @@
       border-radius: inherit;
       pointer-events: none;
       box-shadow:
-        inset 2px 2px 1px -1px rgba(255, 255, 255, 0.9),
+        inset 2px 2px 1px -1px rgba(255, 255, 255, 0.85),
         inset 1px 1px 1px -0.5px rgba(255, 255, 255, 0.6),
-        inset -2px -2px 2px -2px rgba(20, 20, 19, 0.45),
-        inset -1px -1px 1px -0.5px rgba(20, 20, 19, 0.35),
-        inset 0 0 8px 4px rgba(255, 255, 255, 0.12),
-        0 0 14px rgba(255, 255, 255, 0.25);
+        inset -2px -2px 2px -2px rgba(40, 12, 90, 0.55),
+        inset 0 0 8px 4px rgba(255, 255, 255, 0.1),
+        0 0 22px rgba(124, 58, 237, 0.5);
     }
 
-    /* dark dot so it shows on the clear glass */
+    /* white dot on the purple-lit glass */
     .btn.btn-liquid::before {
-      background: radial-gradient(circle, var(--ink) 0 4px, rgba(20, 20, 19, 0.22) 5px);
+      background: radial-gradient(circle, #fff 0 4px, rgba(255, 255, 255, 0.25) 5px);
     }
 
     .btn.btn-liquid:hover {
