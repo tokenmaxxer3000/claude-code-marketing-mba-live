@@ -1390,7 +1390,9 @@
     }
 
     section {
-      background: var(--paper);
+      /* transparent so the page-wide purple bloom shows through;
+         dark sections (.bonus/.mentor/.price) override this with #141413 */
+      background: transparent;
       color: var(--ink);
       padding: 76px 0;
       overflow: hidden;
@@ -1629,7 +1631,7 @@
     .stats .stat .label { color: rgba(255, 255, 255, 0.58); }
 
     .proof-strip {
-      background: var(--paper);
+      background: transparent;
       padding: 40px 24px 8px;
     }
 
@@ -1677,7 +1679,7 @@
 
     .orientation-section {
       padding-top: 64px;
-      background: var(--paper);
+      background: transparent;
     }
 
     .copy {
@@ -1723,7 +1725,7 @@
     .mentor-section,
     .skills,
     .faq {
-      background: var(--paper);
+      background: transparent;
     }
 
     .story {
@@ -1775,7 +1777,7 @@
     .proof-item .label { color: rgba(20, 20, 19, 0.48); }
 
     .inside {
-      background: var(--paper);
+      background: transparent;
       padding-top: 58px;
     }
 
@@ -2117,18 +2119,20 @@
       letter-spacing: -0.015em;
     }
 
+    /* Page-wide radial center-glow — one purple bloom fixed behind all content.
+       Light sections are transparent so it shows top to bottom; dark sections cover it. */
+    /* Page-wide radial center-glow — one purple bloom fixed behind all content,
+       on a soft light base. Light sections are transparent so it shows top to
+       bottom; dark sections (.bonus/.mentor/.price) cover it. */
     body::before {
       content: "";
       position: fixed;
       inset: 0;
       z-index: -2;
-      background:
-        linear-gradient(120deg, rgba(76,29,149,0.16) 0%, transparent 26%, rgba(124,58,237,0.08) 54%, transparent 78%),
-        linear-gradient(240deg, transparent 0%, rgba(76,29,149,0.08) 42%, transparent 72%),
-        linear-gradient(180deg, #f4f4f1 0%, #ecebe7 100%);
-      background-size: 150% 150%, 130% 130%, 100% 100%;
-      animation: ambientDepth 18s ease-in-out infinite alternate;
       pointer-events: none;
+      background:
+        radial-gradient(circle at 50% 40%, rgba(124, 58, 237, 0.22) 0%, rgba(124, 58, 237, 0.08) 34%, transparent 64%),
+        linear-gradient(180deg, #f4f4f1 0%, #ecebe7 100%);
     }
 
     body::after {
@@ -2264,10 +2268,10 @@
       width: auto;
       height: auto;
       transform: none;
-      /* radial center-glow method — a single purple bloom on a soft warm base */
+      /* hero keeps a soft warm center bloom; the purple now comes from the page-wide glow */
       background:
-        radial-gradient(circle at 50% 42%, rgba(124, 58, 237, 0.34) 0%, rgba(124, 58, 237, 0.12) 32%, transparent 64%),
-        radial-gradient(ellipse at center, rgba(220, 220, 215, 0.5), transparent 78%);
+        radial-gradient(circle at 50% 42%, rgba(124, 58, 237, 0.12) 0%, transparent 56%),
+        radial-gradient(ellipse at center, rgba(220, 220, 215, 0.45), transparent 78%);
       pointer-events: none;
     }
 
