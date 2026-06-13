@@ -2369,7 +2369,8 @@
 
     .hero h1 .accent {
       display: inline;
-      color: var(--ink);
+      /* highlight by colour — deeper ember stays legible on ivory */
+      color: var(--amethyst-hover);
       background: none;
       -webkit-text-fill-color: currentColor;
       /* match the rest of the headline — no serif on light surfaces */
@@ -2382,12 +2383,7 @@
       padding-inline: 0;
       box-decoration-break: clone;
       -webkit-box-decoration-break: clone;
-      /* Anthropic-style emphasis: thick clay underline, not colour or serif */
-      text-decoration: underline;
-      text-decoration-color: var(--amethyst);
-      text-decoration-thickness: 0.06em;
-      text-underline-offset: 0.1em;
-      text-decoration-skip-ink: none;
+      text-decoration: none;
     }
 
     .hero .lede {
