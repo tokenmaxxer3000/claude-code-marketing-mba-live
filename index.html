@@ -1961,20 +1961,41 @@
     .cost-card .job { color: rgba(20, 20, 19, 0.56); }
     .cost-card .cost { color: var(--taupe); }
 
-    /* sticky cost bar chart — old-way bar grows segment-by-segment vs a tiny $100 bar */
+    /* cost section: two-column — cards scroll left, chart pinned right */
+    .cost-section { max-width: 1060px; }
+    .cost-section .copy,
+    .cost-section .center { max-width: 760px; margin-inline: auto; }
+
+    .cost-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 300px;
+      gap: 40px;
+      align-items: start;
+      margin: 8px 0 36px;
+    }
+
+    /* cards stack vertically in the left column so you scroll past them one by one */
+    .cost-layout .cost-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    /* bar chart pinned in the right column — grows segment-by-segment vs a tiny $100 bar */
     .cost-chart {
       position: sticky;
-      top: 84px;
-      z-index: 9;
-      width: fit-content;
-      max-width: 100%;
-      margin: 0 auto 28px;
-      padding: 20px 30px 16px;
+      top: 100px;
+      padding: 22px 26px 18px;
       border-radius: 20px;
       background: rgba(255, 255, 255, 0.78);
       -webkit-backdrop-filter: blur(12px) saturate(1.2);
       backdrop-filter: blur(12px) saturate(1.2);
-      box-shadow: 0 14px 40px -12px rgba(76, 29, 149, 0.35), inset 0 0 0 1px rgba(124, 58, 237, 0.14);
+      box-shadow: 0 14px 40px -12px rgba(76, 29, 149, 0.3), inset 0 0 0 1px rgba(124, 58, 237, 0.14);
+    }
+
+    @media (max-width: 860px) {
+      .cost-layout { grid-template-columns: 1fr; }
+      .cost-chart { position: static; margin-top: 8px; }
     }
 
     .chart-bars {
@@ -3881,7 +3902,7 @@
 </section>
 
 <section>
-  <div class="container-narrow">
+  <div class="container cost-section">
     <div class="center" style="margin-bottom: 32px;">
       <h2 class="heading-lg">Here's what you'd pay to do this the old way.</h2>
     </div>
@@ -3889,45 +3910,47 @@
       <p>A year ago, to get what this system does for you, you'd be hiring:</p>
     </div>
 
-    <div class="cost-chart" aria-hidden="true">
-      <div class="chart-bars">
-        <div class="chart-group">
-          <div class="bar bar-old">
-            <span class="seg seg-ghost"></span>
-            <span class="seg seg-funnel"></span>
-            <span class="seg seg-designer"></span>
-          </div>
-          <div class="bar-amount"><span class="chart-total">$0</span><small>/mo</small></div>
-          <div class="bar-name">The old way</div>
+    <div class="cost-layout">
+      <div class="cost-grid">
+        <div class="cost-card" data-lo="3000" data-hi="6000">
+          <div class="role">Ghostwriter</div>
+          <div class="job">Write your posts and newsletter in your voice.</div>
+          <div class="cost">$<span class="c-lo" data-to="3000">3,000</span> to $<span class="c-hi" data-to="6000">6,000</span> a month</div>
         </div>
-        <div class="chart-group">
-          <div class="bar bar-claude"><span class="seg seg-claude"></span></div>
-          <div class="bar-amount">$100<small>/mo</small></div>
-          <div class="bar-name">With Claude</div>
+        <div class="cost-card" data-lo="4000" data-hi="8000">
+          <div class="role">Funnel marketer</div>
+          <div class="job">Build your lead magnets, landing pages, and email sequences.</div>
+          <div class="cost">$<span class="c-lo" data-to="4000">4,000</span> to $<span class="c-hi" data-to="8000">8,000</span> a month</div>
+        </div>
+        <div class="cost-card" data-lo="1500" data-hi="3000">
+          <div class="role">Designer</div>
+          <div class="job">Make it all look professional every time you need a page.</div>
+          <div class="cost">$<span class="c-lo" data-to="1500">1,500</span> to $<span class="c-hi" data-to="3000">3,000</span> per page</div>
         </div>
       </div>
-      <div class="chart-legend">
-        <span><i class="dot dot-ghost"></i>Ghostwriter</span>
-        <span><i class="dot dot-funnel"></i>Funnel marketer</span>
-        <span><i class="dot dot-designer"></i>Designer</span>
-      </div>
-    </div>
 
-    <div class="cost-grid">
-      <div class="cost-card" data-lo="3000" data-hi="6000">
-        <div class="role">Ghostwriter</div>
-        <div class="job">Write your posts and newsletter in your voice.</div>
-        <div class="cost">$<span class="c-lo" data-to="3000">3,000</span> to $<span class="c-hi" data-to="6000">6,000</span> a month</div>
-      </div>
-      <div class="cost-card" data-lo="4000" data-hi="8000">
-        <div class="role">Funnel marketer</div>
-        <div class="job">Build your lead magnets, landing pages, and email sequences.</div>
-        <div class="cost">$<span class="c-lo" data-to="4000">4,000</span> to $<span class="c-hi" data-to="8000">8,000</span> a month</div>
-      </div>
-      <div class="cost-card" data-lo="1500" data-hi="3000">
-        <div class="role">Designer</div>
-        <div class="job">Make it all look professional every time you need a page.</div>
-        <div class="cost">$<span class="c-lo" data-to="1500">1,500</span> to $<span class="c-hi" data-to="3000">3,000</span> per page</div>
+      <div class="cost-chart" aria-hidden="true">
+        <div class="chart-bars">
+          <div class="chart-group">
+            <div class="bar bar-old">
+              <span class="seg seg-ghost"></span>
+              <span class="seg seg-funnel"></span>
+              <span class="seg seg-designer"></span>
+            </div>
+            <div class="bar-amount"><span class="chart-total">$0</span><small>/mo</small></div>
+            <div class="bar-name">The old way</div>
+          </div>
+          <div class="chart-group">
+            <div class="bar bar-claude"><span class="seg seg-claude"></span></div>
+            <div class="bar-amount">$100<small>/mo</small></div>
+            <div class="bar-name">With Claude</div>
+          </div>
+        </div>
+        <div class="chart-legend">
+          <span><i class="dot dot-ghost"></i>Ghostwriter</span>
+          <span><i class="dot dot-funnel"></i>Funnel marketer</span>
+          <span><i class="dot dot-designer"></i>Designer</span>
+        </div>
       </div>
     </div>
 
