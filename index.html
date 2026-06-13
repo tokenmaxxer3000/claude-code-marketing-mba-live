@@ -2369,18 +2369,24 @@
 
     .hero h1 .accent {
       display: inline;
-      color: var(--amethyst);
+      color: var(--ink);
       background: none;
       -webkit-text-fill-color: currentColor;
       font-family: "Playfair Display", Georgia, serif;
       font-size: 0.96em;
       font-style: italic;
-      font-weight: 400;
+      font-weight: 500;
       letter-spacing: -0.035em;
       line-height: 1.04;
       padding-inline: 0.045em;
       box-decoration-break: clone;
       -webkit-box-decoration-break: clone;
+      /* Anthropic-style emphasis: thick clay underline, not colour */
+      text-decoration: underline;
+      text-decoration-color: var(--amethyst);
+      text-decoration-thickness: 0.07em;
+      text-underline-offset: 0.12em;
+      text-decoration-skip-ink: none;
     }
 
     .hero .lede {
