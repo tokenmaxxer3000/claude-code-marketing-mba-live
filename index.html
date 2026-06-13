@@ -1961,44 +1961,102 @@
     .cost-card .job { color: rgba(20, 20, 19, 0.56); }
     .cost-card .cost { color: var(--taupe); }
 
-    /* sticky running tally — climbs as each cost card scrolls past */
-    .cost-tally {
+    /* sticky cost bar chart — old-way bar grows segment-by-segment vs a tiny $100 bar */
+    .cost-chart {
       position: sticky;
-      top: 88px;
+      top: 84px;
       z-index: 9;
+      width: fit-content;
+      max-width: 100%;
+      margin: 0 auto 28px;
+      padding: 20px 30px 16px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.78);
+      -webkit-backdrop-filter: blur(12px) saturate(1.2);
+      backdrop-filter: blur(12px) saturate(1.2);
+      box-shadow: 0 14px 40px -12px rgba(76, 29, 149, 0.35), inset 0 0 0 1px rgba(124, 58, 237, 0.14);
+    }
+
+    .chart-bars {
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      gap: 40px;
+      height: 200px;
+    }
+
+    .chart-group {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 2px;
-      width: fit-content;
-      margin: 0 auto 24px;
-      padding: 14px 30px;
-      border-radius: 18px;
-      background: rgba(255, 255, 255, 0.72);
-      -webkit-backdrop-filter: blur(10px) saturate(1.2);
-      backdrop-filter: blur(10px) saturate(1.2);
-      box-shadow: 0 10px 34px -10px rgba(76, 29, 149, 0.35), inset 0 0 0 1px rgba(124, 58, 237, 0.16);
+      height: 100%;
+      justify-content: flex-end;
+      gap: 8px;
     }
 
-    .cost-tally-label {
-      font-size: 12px;
-      font-weight: 600;
-      letter-spacing: 1.4px;
-      text-transform: uppercase;
-      color: rgba(20, 20, 19, 0.5);
+    .bar {
+      width: 76px;
+      display: flex;
+      flex-direction: column-reverse; /* segments stack from the bottom up */
+      border-radius: 8px 8px 0 0;
+      overflow: hidden;
     }
 
-    .cost-tally-amount {
+    .bar .seg {
+      width: 100%;
+      height: 0;
+      transition: height 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .seg-ghost    { background: #7c3aed; }
+    .seg-funnel   { background: #a855f7; }
+    .seg-designer { background: #6d28d9; }
+    .seg-claude   { background: #22c55e; }
+
+    .bar-claude {
+      align-self: flex-end;
+      box-shadow: 0 0 16px rgba(34, 197, 94, 0.4);
+    }
+
+    .bar-amount {
       font-family: var(--inter-tight);
       font-weight: 700;
-      font-size: clamp(28px, 4vw, 40px);
-      letter-spacing: -0.03em;
-      color: var(--lavender);
+      font-size: 20px;
+      letter-spacing: -0.02em;
+      color: var(--ink);
       font-variant-numeric: tabular-nums;
-      line-height: 1.05;
+      white-space: nowrap;
+    }
+    .bar-amount small { font-size: 12px; font-weight: 500; color: rgba(20,20,19,0.5); }
+
+    .bar-name {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+      color: rgba(20, 20, 19, 0.55);
     }
 
-    .cost-tally-amount .ct-dash { margin: 0 4px; opacity: 0.5; }
+    .chart-legend {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px 16px;
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px solid rgba(20, 20, 19, 0.08);
+    }
+    .chart-legend span {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      color: rgba(20, 20, 19, 0.6);
+    }
+    .chart-legend .dot { width: 10px; height: 10px; border-radius: 3px; }
+    .dot-ghost    { background: #7c3aed; }
+    .dot-funnel   { background: #a855f7; }
+    .dot-designer { background: #6d28d9; }
 
     .price-section {
       background: #141413;
@@ -3831,9 +3889,28 @@
       <p>A year ago, to get what this system does for you, you'd be hiring:</p>
     </div>
 
-    <div class="cost-tally" aria-hidden="true">
-      <span class="cost-tally-label">The old way, every month</span>
-      <span class="cost-tally-amount"><span class="ct-lo" data-to="0">$0</span><span class="ct-dash">–</span><span class="ct-hi" data-to="0">$0</span></span>
+    <div class="cost-chart" aria-hidden="true">
+      <div class="chart-bars">
+        <div class="chart-group">
+          <div class="bar bar-old">
+            <span class="seg seg-ghost"></span>
+            <span class="seg seg-funnel"></span>
+            <span class="seg seg-designer"></span>
+          </div>
+          <div class="bar-amount"><span class="chart-total">$0</span><small>/mo</small></div>
+          <div class="bar-name">The old way</div>
+        </div>
+        <div class="chart-group">
+          <div class="bar bar-claude"><span class="seg seg-claude"></span></div>
+          <div class="bar-amount">$100<small>/mo</small></div>
+          <div class="bar-name">With Claude</div>
+        </div>
+      </div>
+      <div class="chart-legend">
+        <span><i class="dot dot-ghost"></i>Ghostwriter</span>
+        <span><i class="dot dot-funnel"></i>Funnel marketer</span>
+        <span><i class="dot dot-designer"></i>Designer</span>
+      </div>
     </div>
 
     <div class="cost-grid">
@@ -4414,25 +4491,30 @@
   })();
 
   (function() {
-    var tally = document.querySelector('.cost-tally');
-    if (!tally) return;
-    var ctLo = tally.querySelector('.ct-lo'), ctHi = tally.querySelector('.ct-hi');
+    var chart = document.querySelector('.cost-chart');
+    if (!chart) return;
+    var totalEl = chart.querySelector('.chart-total');
+    var claude = chart.querySelector('.seg-claude');
+    var segs = [
+      chart.querySelector('.seg-ghost'),
+      chart.querySelector('.seg-funnel'),
+      chart.querySelector('.seg-designer')
+    ];
     var cards = Array.prototype.slice.call(document.querySelectorAll('.cost-card'));
     if (!cards.length) return;
     var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+    var MAX_BAR = 200, MAX_TOTAL = 17000;
+    if (claude) claude.style.height = '10px'; // tiny but visible $100 bar
+
     function money(n) { return '$' + Math.round(n).toLocaleString('en-US'); }
+    function barH(v) { return (v / MAX_TOTAL * MAX_BAR) + 'px'; }
 
-    var dispLo = 0, dispHi = 0, targetLo = 0, targetHi = 0, raf = null;
-
+    var dispTotal = 0, targetTotal = 0, raf = null;
     function frame() {
-      dispLo += (targetLo - dispLo) * 0.12;
-      dispHi += (targetHi - dispHi) * 0.12;
-      if (Math.abs(targetLo - dispLo) < 1 && Math.abs(targetHi - dispHi) < 1) {
-        dispLo = targetLo; dispHi = targetHi; raf = null;
-      }
-      ctLo.textContent = money(dispLo);
-      ctHi.textContent = money(dispHi);
+      dispTotal += (targetTotal - dispTotal) * 0.12;
+      if (Math.abs(targetTotal - dispTotal) < 1) { dispTotal = targetTotal; raf = null; }
+      totalEl.textContent = money(dispTotal);
       if (raf !== null) raf = requestAnimationFrame(frame);
     }
     function kick() { if (raf === null) raf = requestAnimationFrame(frame); }
@@ -4440,6 +4522,7 @@
     // each card's own price counts up once, when it first scrolls into view
     function countCard(card) {
       var lo = card.querySelector('.c-lo'), hi = card.querySelector('.c-hi');
+      if (!lo || !hi) return;
       var loTo = +lo.getAttribute('data-to'), hiTo = +hi.getAttribute('data-to');
       if (reduce) { lo.textContent = loTo.toLocaleString('en-US'); hi.textContent = hiTo.toLocaleString('en-US'); return; }
       var start = null, dur = 900;
@@ -4454,19 +4537,26 @@
     }
 
     function update() {
-      var tl = 0, th = 0;
-      cards.forEach(function(c) {
-        if (c.getBoundingClientRect().top < window.innerHeight * 0.62) {
-          tl += +c.getAttribute('data-lo'); th += +c.getAttribute('data-hi');
+      var total = 0;
+      cards.forEach(function(c, i) {
+        if (c.getBoundingClientRect().top < window.innerHeight * 0.6) {
+          var hi = +c.getAttribute('data-hi');
+          total += hi;
+          if (segs[i] && !segs[i]._shown) { segs[i]._shown = true; segs[i].style.height = barH(hi); }
           if (!c._counted) { c._counted = true; countCard(c); }
         }
       });
-      // running total only climbs — once a cost is added up, it stays
-      if (tl > targetLo) {
-        targetLo = tl; targetHi = th;
-        if (reduce) { dispLo = tl; dispHi = th; ctLo.textContent = money(tl); ctHi.textContent = money(th); }
+      // bar + total only climb — once a cost is added, it stays
+      if (total > targetTotal) {
+        targetTotal = total;
+        if (reduce) { dispTotal = total; totalEl.textContent = money(total); }
         else kick();
       }
+    }
+
+    if (reduce) {
+      cards.forEach(function(c, i) { if (segs[i]) segs[i].style.height = barH(+c.getAttribute('data-hi')); });
+      totalEl.textContent = money(MAX_TOTAL);
     }
 
     update();
