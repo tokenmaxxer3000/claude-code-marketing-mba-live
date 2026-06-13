@@ -1961,6 +1961,45 @@
     .cost-card .job { color: rgba(20, 20, 19, 0.56); }
     .cost-card .cost { color: var(--taupe); }
 
+    /* sticky running tally — climbs as each cost card scrolls past */
+    .cost-tally {
+      position: sticky;
+      top: 88px;
+      z-index: 9;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+      width: fit-content;
+      margin: 0 auto 24px;
+      padding: 14px 30px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.72);
+      -webkit-backdrop-filter: blur(10px) saturate(1.2);
+      backdrop-filter: blur(10px) saturate(1.2);
+      box-shadow: 0 10px 34px -10px rgba(76, 29, 149, 0.35), inset 0 0 0 1px rgba(124, 58, 237, 0.16);
+    }
+
+    .cost-tally-label {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 1.4px;
+      text-transform: uppercase;
+      color: rgba(20, 20, 19, 0.5);
+    }
+
+    .cost-tally-amount {
+      font-family: var(--inter-tight);
+      font-weight: 700;
+      font-size: clamp(28px, 4vw, 40px);
+      letter-spacing: -0.03em;
+      color: var(--lavender);
+      font-variant-numeric: tabular-nums;
+      line-height: 1.05;
+    }
+
+    .cost-tally-amount .ct-dash { margin: 0 4px; opacity: 0.5; }
+
     .price-section {
       background: #141413;
       color: white;
@@ -3792,21 +3831,26 @@
       <p>A year ago, to get what this system does for you, you'd be hiring:</p>
     </div>
 
+    <div class="cost-tally" aria-hidden="true">
+      <span class="cost-tally-label">The old way, every month</span>
+      <span class="cost-tally-amount"><span class="ct-lo" data-to="0">$0</span><span class="ct-dash">–</span><span class="ct-hi" data-to="0">$0</span></span>
+    </div>
+
     <div class="cost-grid">
-      <div class="cost-card">
+      <div class="cost-card" data-lo="3000" data-hi="6000">
         <div class="role">Ghostwriter</div>
         <div class="job">Write your posts and newsletter in your voice.</div>
-        <div class="cost">$3,000 to $6,000 a month</div>
+        <div class="cost">$<span class="c-lo" data-to="3000">3,000</span> to $<span class="c-hi" data-to="6000">6,000</span> a month</div>
       </div>
-      <div class="cost-card">
+      <div class="cost-card" data-lo="4000" data-hi="8000">
         <div class="role">Funnel marketer</div>
         <div class="job">Build your lead magnets, landing pages, and email sequences.</div>
-        <div class="cost">$4,000 to $8,000 a month</div>
+        <div class="cost">$<span class="c-lo" data-to="4000">4,000</span> to $<span class="c-hi" data-to="8000">8,000</span> a month</div>
       </div>
-      <div class="cost-card">
+      <div class="cost-card" data-lo="1500" data-hi="3000">
         <div class="role">Designer</div>
         <div class="job">Make it all look professional every time you need a page.</div>
-        <div class="cost">$1,500 to $3,000 per page</div>
+        <div class="cost">$<span class="c-lo" data-to="1500">1,500</span> to $<span class="c-hi" data-to="3000">3,000</span> per page</div>
       </div>
     </div>
 
@@ -4362,6 +4406,67 @@
         w.classList.toggle('spot', !done && i === revealed - 1);
         w.classList.toggle('seen', !done && i < revealed - 1);
       });
+    }
+
+    update();
+    window.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
+  })();
+
+  (function() {
+    var tally = document.querySelector('.cost-tally');
+    if (!tally) return;
+    var ctLo = tally.querySelector('.ct-lo'), ctHi = tally.querySelector('.ct-hi');
+    var cards = Array.prototype.slice.call(document.querySelectorAll('.cost-card'));
+    if (!cards.length) return;
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function money(n) { return '$' + Math.round(n).toLocaleString('en-US'); }
+
+    var dispLo = 0, dispHi = 0, targetLo = 0, targetHi = 0, raf = null;
+
+    function frame() {
+      dispLo += (targetLo - dispLo) * 0.12;
+      dispHi += (targetHi - dispHi) * 0.12;
+      if (Math.abs(targetLo - dispLo) < 1 && Math.abs(targetHi - dispHi) < 1) {
+        dispLo = targetLo; dispHi = targetHi; raf = null;
+      }
+      ctLo.textContent = money(dispLo);
+      ctHi.textContent = money(dispHi);
+      if (raf !== null) raf = requestAnimationFrame(frame);
+    }
+    function kick() { if (raf === null) raf = requestAnimationFrame(frame); }
+
+    // each card's own price counts up once, when it first scrolls into view
+    function countCard(card) {
+      var lo = card.querySelector('.c-lo'), hi = card.querySelector('.c-hi');
+      var loTo = +lo.getAttribute('data-to'), hiTo = +hi.getAttribute('data-to');
+      if (reduce) { lo.textContent = loTo.toLocaleString('en-US'); hi.textContent = hiTo.toLocaleString('en-US'); return; }
+      var start = null, dur = 900;
+      function step(ts) {
+        if (start === null) start = ts;
+        var p = Math.min((ts - start) / dur, 1), e = 1 - Math.pow(1 - p, 3);
+        lo.textContent = Math.round(loTo * e).toLocaleString('en-US');
+        hi.textContent = Math.round(hiTo * e).toLocaleString('en-US');
+        if (p < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    }
+
+    function update() {
+      var tl = 0, th = 0;
+      cards.forEach(function(c) {
+        if (c.getBoundingClientRect().top < window.innerHeight * 0.62) {
+          tl += +c.getAttribute('data-lo'); th += +c.getAttribute('data-hi');
+          if (!c._counted) { c._counted = true; countCard(c); }
+        }
+      });
+      // running total only climbs — once a cost is added up, it stays
+      if (tl > targetLo) {
+        targetLo = tl; targetHi = th;
+        if (reduce) { dispLo = tl; dispHi = th; ctLo.textContent = money(tl); ctHi.textContent = money(th); }
+        else kick();
+      }
     }
 
     update();
