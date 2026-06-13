@@ -2613,8 +2613,17 @@
     .liquid-wrap {
       position: relative;
       display: inline-flex;
+      align-items: stretch;
+      line-height: 0;
+      vertical-align: top;
       border-radius: 9999px;
+      /* carry the hero CTA's top spacing + stacking so the button itself
+         has no margin and the backdrop sits exactly behind it */
+      margin-top: 28px;
+      z-index: 12;
     }
+
+    .liquid-wrap .btn.btn-liquid { margin-top: 0; }
 
     .liquid-backsplash {
       position: absolute;
@@ -4126,7 +4135,6 @@
     var revealTargets = [
       '.hero h1',
       '.hero .lede',
-      '.hero .btn-large',
       '.hero-dashboard',
       '.stats-row',
       '.ole-portrait',
