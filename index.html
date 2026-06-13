@@ -1961,124 +1961,6 @@
     .cost-card .job { color: rgba(20, 20, 19, 0.56); }
     .cost-card .cost { color: var(--taupe); }
 
-    /* cost section: two-column — cards scroll left, chart pinned right */
-    .cost-section { max-width: 1060px; }
-    .cost-section .copy,
-    .cost-section .center { max-width: 760px; margin-inline: auto; }
-
-    .cost-layout {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) 300px;
-      gap: 40px;
-      align-items: start;
-      margin: 8px 0 36px;
-    }
-
-    /* cards stack vertically in the left column so you scroll past them one by one */
-    .cost-layout .cost-grid {
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-    }
-
-    /* bar chart pinned in the right column — grows segment-by-segment vs a tiny $100 bar */
-    .cost-chart {
-      position: sticky;
-      top: 100px;
-      padding: 22px 26px 18px;
-      border-radius: 20px;
-      background: rgba(255, 255, 255, 0.78);
-      -webkit-backdrop-filter: blur(12px) saturate(1.2);
-      backdrop-filter: blur(12px) saturate(1.2);
-      box-shadow: 0 14px 40px -12px rgba(76, 29, 149, 0.3), inset 0 0 0 1px rgba(124, 58, 237, 0.14);
-    }
-
-    @media (max-width: 860px) {
-      .cost-layout { grid-template-columns: 1fr; }
-      .cost-chart { position: static; margin-top: 8px; }
-    }
-
-    .chart-bars {
-      display: flex;
-      align-items: flex-end;
-      justify-content: center;
-      gap: 40px;
-      height: 200px;
-    }
-
-    .chart-group {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      height: 100%;
-      justify-content: flex-end;
-      gap: 8px;
-    }
-
-    .bar {
-      width: 76px;
-      display: flex;
-      flex-direction: column-reverse; /* segments stack from the bottom up */
-      border-radius: 8px 8px 0 0;
-      overflow: hidden;
-    }
-
-    .bar .seg {
-      width: 100%;
-      height: 0;
-      transition: height 0.7s cubic-bezier(0.22, 1, 0.36, 1);
-    }
-
-    .seg-ghost    { background: #7c3aed; }
-    .seg-funnel   { background: #a855f7; }
-    .seg-designer { background: #6d28d9; }
-    .seg-claude   { background: #22c55e; }
-
-    .bar-claude {
-      align-self: flex-end;
-      box-shadow: 0 0 16px rgba(34, 197, 94, 0.4);
-    }
-
-    .bar-amount {
-      font-family: var(--inter-tight);
-      font-weight: 700;
-      font-size: 20px;
-      letter-spacing: -0.02em;
-      color: var(--ink);
-      font-variant-numeric: tabular-nums;
-      white-space: nowrap;
-    }
-    .bar-amount small { font-size: 12px; font-weight: 500; color: rgba(20,20,19,0.5); }
-
-    .bar-name {
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.6px;
-      text-transform: uppercase;
-      color: rgba(20, 20, 19, 0.55);
-    }
-
-    .chart-legend {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 8px 16px;
-      margin-top: 14px;
-      padding-top: 12px;
-      border-top: 1px solid rgba(20, 20, 19, 0.08);
-    }
-    .chart-legend span {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 12px;
-      color: rgba(20, 20, 19, 0.6);
-    }
-    .chart-legend .dot { width: 10px; height: 10px; border-radius: 3px; }
-    .dot-ghost    { background: #7c3aed; }
-    .dot-funnel   { background: #a855f7; }
-    .dot-designer { background: #6d28d9; }
-
     .price-section {
       background: #141413;
       color: white;
@@ -3902,7 +3784,7 @@
 </section>
 
 <section>
-  <div class="container cost-section">
+  <div class="container-narrow">
     <div class="center" style="margin-bottom: 32px;">
       <h2 class="heading-lg">Here's what you'd pay to do this the old way.</h2>
     </div>
@@ -3910,47 +3792,21 @@
       <p>A year ago, to get what this system does for you, you'd be hiring:</p>
     </div>
 
-    <div class="cost-layout">
-      <div class="cost-grid">
-        <div class="cost-card" data-lo="3000" data-hi="6000">
-          <div class="role">Ghostwriter</div>
-          <div class="job">Write your posts and newsletter in your voice.</div>
-          <div class="cost">$<span class="c-lo" data-to="3000">3,000</span> to $<span class="c-hi" data-to="6000">6,000</span> a month</div>
-        </div>
-        <div class="cost-card" data-lo="4000" data-hi="8000">
-          <div class="role">Funnel marketer</div>
-          <div class="job">Build your lead magnets, landing pages, and email sequences.</div>
-          <div class="cost">$<span class="c-lo" data-to="4000">4,000</span> to $<span class="c-hi" data-to="8000">8,000</span> a month</div>
-        </div>
-        <div class="cost-card" data-lo="1500" data-hi="3000">
-          <div class="role">Designer</div>
-          <div class="job">Make it all look professional every time you need a page.</div>
-          <div class="cost">$<span class="c-lo" data-to="1500">1,500</span> to $<span class="c-hi" data-to="3000">3,000</span> per page</div>
-        </div>
+    <div class="cost-grid">
+      <div class="cost-card">
+        <div class="role">Ghostwriter</div>
+        <div class="job">Write your posts and newsletter in your voice.</div>
+        <div class="cost">$3,000 to $6,000 a month</div>
       </div>
-
-      <div class="cost-chart" aria-hidden="true">
-        <div class="chart-bars">
-          <div class="chart-group">
-            <div class="bar bar-old">
-              <span class="seg seg-ghost"></span>
-              <span class="seg seg-funnel"></span>
-              <span class="seg seg-designer"></span>
-            </div>
-            <div class="bar-amount"><span class="chart-total">$0</span><small>/mo</small></div>
-            <div class="bar-name">The old way</div>
-          </div>
-          <div class="chart-group">
-            <div class="bar bar-claude"><span class="seg seg-claude"></span></div>
-            <div class="bar-amount">$100<small>/mo</small></div>
-            <div class="bar-name">With Claude</div>
-          </div>
-        </div>
-        <div class="chart-legend">
-          <span><i class="dot dot-ghost"></i>Ghostwriter</span>
-          <span><i class="dot dot-funnel"></i>Funnel marketer</span>
-          <span><i class="dot dot-designer"></i>Designer</span>
-        </div>
+      <div class="cost-card">
+        <div class="role">Funnel marketer</div>
+        <div class="job">Build your lead magnets, landing pages, and email sequences.</div>
+        <div class="cost">$4,000 to $8,000 a month</div>
+      </div>
+      <div class="cost-card">
+        <div class="role">Designer</div>
+        <div class="job">Make it all look professional every time you need a page.</div>
+        <div class="cost">$1,500 to $3,000 per page</div>
       </div>
     </div>
 
@@ -4506,80 +4362,6 @@
         w.classList.toggle('spot', !done && i === revealed - 1);
         w.classList.toggle('seen', !done && i < revealed - 1);
       });
-    }
-
-    update();
-    window.addEventListener('scroll', update, { passive: true });
-    window.addEventListener('resize', update);
-  })();
-
-  (function() {
-    var chart = document.querySelector('.cost-chart');
-    if (!chart) return;
-    var totalEl = chart.querySelector('.chart-total');
-    var claude = chart.querySelector('.seg-claude');
-    var segs = [
-      chart.querySelector('.seg-ghost'),
-      chart.querySelector('.seg-funnel'),
-      chart.querySelector('.seg-designer')
-    ];
-    var cards = Array.prototype.slice.call(document.querySelectorAll('.cost-card'));
-    if (!cards.length) return;
-    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    var MAX_BAR = 200, MAX_TOTAL = 17000;
-    if (claude) claude.style.height = '10px'; // tiny but visible $100 bar
-
-    function money(n) { return '$' + Math.round(n).toLocaleString('en-US'); }
-    function barH(v) { return (v / MAX_TOTAL * MAX_BAR) + 'px'; }
-
-    var dispTotal = 0, targetTotal = 0, raf = null;
-    function frame() {
-      dispTotal += (targetTotal - dispTotal) * 0.12;
-      if (Math.abs(targetTotal - dispTotal) < 1) { dispTotal = targetTotal; raf = null; }
-      totalEl.textContent = money(dispTotal);
-      if (raf !== null) raf = requestAnimationFrame(frame);
-    }
-    function kick() { if (raf === null) raf = requestAnimationFrame(frame); }
-
-    // each card's own price counts up once, when it first scrolls into view
-    function countCard(card) {
-      var lo = card.querySelector('.c-lo'), hi = card.querySelector('.c-hi');
-      if (!lo || !hi) return;
-      var loTo = +lo.getAttribute('data-to'), hiTo = +hi.getAttribute('data-to');
-      if (reduce) { lo.textContent = loTo.toLocaleString('en-US'); hi.textContent = hiTo.toLocaleString('en-US'); return; }
-      var start = null, dur = 900;
-      function step(ts) {
-        if (start === null) start = ts;
-        var p = Math.min((ts - start) / dur, 1), e = 1 - Math.pow(1 - p, 3);
-        lo.textContent = Math.round(loTo * e).toLocaleString('en-US');
-        hi.textContent = Math.round(hiTo * e).toLocaleString('en-US');
-        if (p < 1) requestAnimationFrame(step);
-      }
-      requestAnimationFrame(step);
-    }
-
-    function update() {
-      var total = 0;
-      cards.forEach(function(c, i) {
-        if (c.getBoundingClientRect().top < window.innerHeight * 0.6) {
-          var hi = +c.getAttribute('data-hi');
-          total += hi;
-          if (segs[i] && !segs[i]._shown) { segs[i]._shown = true; segs[i].style.height = barH(hi); }
-          if (!c._counted) { c._counted = true; countCard(c); }
-        }
-      });
-      // bar + total only climb — once a cost is added, it stays
-      if (total > targetTotal) {
-        targetTotal = total;
-        if (reduce) { dispTotal = total; totalEl.textContent = money(total); }
-        else kick();
-      }
-    }
-
-    if (reduce) {
-      cards.forEach(function(c, i) { if (segs[i]) segs[i].style.height = barH(+c.getAttribute('data-hi')); });
-      totalEl.textContent = money(MAX_TOTAL);
     }
 
     update();
