@@ -2372,20 +2372,21 @@
       color: var(--ink);
       background: none;
       -webkit-text-fill-color: currentColor;
-      font-family: "Playfair Display", Georgia, serif;
-      font-size: 0.96em;
-      font-style: italic;
-      font-weight: 500;
-      letter-spacing: -0.035em;
-      line-height: 1.04;
-      padding-inline: 0.045em;
+      /* match the rest of the headline — no serif on light surfaces */
+      font-family: inherit;
+      font-size: 1em;
+      font-style: normal;
+      font-weight: inherit;
+      letter-spacing: inherit;
+      line-height: inherit;
+      padding-inline: 0;
       box-decoration-break: clone;
       -webkit-box-decoration-break: clone;
-      /* Anthropic-style emphasis: thick clay underline, not colour */
+      /* Anthropic-style emphasis: thick clay underline, not colour or serif */
       text-decoration: underline;
       text-decoration-color: var(--amethyst);
-      text-decoration-thickness: 0.07em;
-      text-underline-offset: 0.12em;
+      text-decoration-thickness: 0.06em;
+      text-underline-offset: 0.1em;
       text-decoration-skip-ink: none;
     }
 
