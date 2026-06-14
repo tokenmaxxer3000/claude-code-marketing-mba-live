@@ -2971,6 +2971,28 @@
       .outcome-section > .container { padding: 32px 22px; border-radius: 22px; }
     }
 
+    /* checklist items reveal one by one with a purple glow pulse as you scroll */
+    @media (prefers-reduced-motion: no-preference) {
+      .outcome-section .source-list li {
+        opacity: 0;
+        transform: translateY(20px) scale(0.985);
+        transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+      }
+      .outcome-section .source-list li.revealed {
+        opacity: 1;
+        transform: none;
+      }
+      .outcome-section .source-list li.glow {
+        animation: cardGlow 1.2s ease-out;
+      }
+    }
+
+    @keyframes cardGlow {
+      0%   { box-shadow: 0 0 0 0 rgba(124, 58, 237, 0); }
+      30%  { box-shadow: 0 10px 34px -6px rgba(124, 58, 237, 0.55); }
+      100% { box-shadow: 0 0 0 0 rgba(124, 58, 237, 0); }
+    }
+
     #proof {
       padding-bottom: 24px;
     }
@@ -4306,6 +4328,36 @@
     }, { threshold: 0.5 });
 
     cards.forEach(function(c) { io.observe(c); });
+  })();
+
+  (function() {
+    var items = Array.prototype.slice.call(document.querySelectorAll('.outcome-section .source-list li'));
+    if (!items.length) return;
+    if (!('IntersectionObserver' in window) || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      items.forEach(function(li) { li.classList.add('revealed'); });
+      return;
+    }
+
+    function reveal(li, delay) {
+      setTimeout(function() {
+        li.classList.add('revealed', 'glow');
+        setTimeout(function() { li.classList.remove('glow'); }, 1300);
+      }, delay);
+    }
+
+    var io = new IntersectionObserver(function(entries) {
+      var batch = entries
+        .filter(function(e) { return e.isIntersecting && !e.target._revealed; })
+        .map(function(e) { return e.target; })
+        .sort(function(a, b) { return items.indexOf(a) - items.indexOf(b); });
+      batch.forEach(function(li, i) {
+        li._revealed = true;
+        io.unobserve(li);
+        reveal(li, i * 120);
+      });
+    }, { threshold: 0.3 });
+
+    items.forEach(function(li) { io.observe(li); });
   })();
 
   document.querySelectorAll('.faq-q').forEach(function(q) {
