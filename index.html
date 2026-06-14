@@ -3809,17 +3809,17 @@
       <div class="cost-card">
         <div class="role">Ghostwriter</div>
         <div class="job">Write your posts and newsletter in your voice.</div>
-        <div class="cost">$3,000 to $6,000 a month</div>
+        <div class="cost">$<span class="c-num" data-to="3000">3,000</span> to $<span class="c-num" data-to="6000">6,000</span> a month</div>
       </div>
       <div class="cost-card">
         <div class="role">Funnel marketer</div>
         <div class="job">Build your lead magnets, landing pages, and email sequences.</div>
-        <div class="cost">$4,000 to $8,000 a month</div>
+        <div class="cost">$<span class="c-num" data-to="4000">4,000</span> to $<span class="c-num" data-to="8000">8,000</span> a month</div>
       </div>
       <div class="cost-card">
         <div class="role">Designer</div>
         <div class="job">Make it all look professional every time you need a page.</div>
-        <div class="cost">$1,500 to $3,000 per page</div>
+        <div class="cost">$<span class="c-num" data-to="1500">1,500</span> to $<span class="c-num" data-to="3000">3,000</span> per page</div>
       </div>
     </div>
 
@@ -4380,6 +4380,41 @@
     update();
     window.addEventListener('scroll', update, { passive: true });
     window.addEventListener('resize', update);
+  })();
+
+  (function() {
+    var cards = Array.prototype.slice.call(document.querySelectorAll('.cost-card'));
+    if (!cards.length) return;
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function countUp(card) {
+      var nums = Array.prototype.slice.call(card.querySelectorAll('.c-num'));
+      nums.forEach(function(el) {
+        var to = +el.getAttribute('data-to');
+        if (reduce) { el.textContent = to.toLocaleString('en-US'); return; }
+        var start = null, dur = 1100;
+        function step(ts) {
+          if (start === null) start = ts;
+          var p = Math.min((ts - start) / dur, 1), e = 1 - Math.pow(1 - p, 3);
+          el.textContent = Math.round(to * e).toLocaleString('en-US');
+          if (p < 1) requestAnimationFrame(step);
+        }
+        requestAnimationFrame(step);
+      });
+    }
+
+    if (!('IntersectionObserver' in window) || reduce) {
+      cards.forEach(countUp);
+      return;
+    }
+
+    var io = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) { countUp(entry.target); io.unobserve(entry.target); }
+      });
+    }, { threshold: 0.5 });
+
+    cards.forEach(function(c) { io.observe(c); });
   })();
 
   document.querySelectorAll('.faq-q').forEach(function(q) {
