@@ -1729,6 +1729,7 @@
     }
 
     .story {
+      padding-top: 0;
       padding-bottom: 56px;
     }
 
@@ -2168,6 +2169,10 @@
       color: var(--ink);
       overflow: visible;
     }
+
+    /* the story intro flows straight into the testimonial — tighten that gap */
+    .orientation-section.tight { padding-bottom: 14px; }
+    section.tight + section.story { padding-top: 28px; }
 
     .tight { padding-top: 56px; }
 
