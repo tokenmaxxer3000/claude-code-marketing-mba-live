@@ -1854,7 +1854,7 @@
       display: grid;
       place-items: center;
       color: white;
-      background: var(--taupe);
+      background: var(--amethyst);
     }
 
     .source-list strong {
@@ -3020,7 +3020,7 @@
     .source-list li::before {
       left: 24px;
       top: 28px;
-      color: var(--amethyst);
+      color: #fff;
     }
 
     .t-quote blockquote,
@@ -3052,6 +3052,19 @@
     .outcome-section {
       padding-top: 30px;
       padding-bottom: 32px;
+    }
+
+    /* soft lavender panel so the "what you get" zone reads as distinct */
+    .outcome-section > .container {
+      max-width: 1000px;
+      background: linear-gradient(180deg, rgba(124, 58, 237, 0.07), rgba(124, 58, 237, 0.03));
+      border: 1px solid rgba(124, 58, 237, 0.14);
+      border-radius: 28px;
+      padding: 48px 44px;
+    }
+
+    @media (max-width: 720px) {
+      .outcome-section > .container { padding: 32px 22px; border-radius: 22px; }
     }
 
     #proof {
