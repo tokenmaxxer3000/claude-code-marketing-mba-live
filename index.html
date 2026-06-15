@@ -3081,6 +3081,146 @@
       box-shadow: none;
     }
 
+    /* --- Two-tier pricing cards --- */
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 24px;
+      max-width: 920px;
+      margin: 40px auto 0;
+      padding: 0 8px;
+      text-align: left;
+    }
+
+    .pricing-card {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      padding: 36px 32px;
+      border-radius: 22px;
+      background: rgba(255, 255, 255, 0.85);
+      border: 1px solid rgba(124, 58, 237, 0.14);
+      box-shadow: 0 12px 36px -16px rgba(76, 29, 149, 0.18);
+      transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s ease;
+    }
+
+    .pricing-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 22px 60px -16px rgba(76, 29, 149, 0.32);
+    }
+
+    .pricing-card-featured {
+      background:
+        linear-gradient(180deg, rgba(124, 58, 237, 0.10), rgba(124, 58, 237, 0.04));
+      border-color: rgba(124, 58, 237, 0.32);
+      box-shadow: 0 14px 44px -14px rgba(76, 29, 149, 0.32);
+    }
+
+    .pricing-badge {
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 6px 14px;
+      border-radius: 9999px;
+      background: var(--amethyst);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      white-space: nowrap;
+      box-shadow: 0 8px 22px -8px rgba(76, 29, 149, 0.5);
+    }
+
+    .pricing-head {
+      margin-bottom: 22px;
+    }
+
+    .pricing-tag {
+      display: inline-block;
+      padding: 5px 10px;
+      border-radius: 8px;
+      background: rgba(124, 58, 237, 0.1);
+      color: var(--amethyst);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.3px;
+      text-transform: uppercase;
+    }
+
+    .pricing-amount {
+      display: flex;
+      align-items: flex-start;
+      gap: 2px;
+      margin-top: 16px;
+      color: var(--ink);
+      font-family: var(--inter-tight, inherit);
+      font-weight: 700;
+      font-size: clamp(48px, 6vw, 64px);
+      line-height: 1;
+      letter-spacing: -0.03em;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .pricing-currency {
+      font-size: 0.5em;
+      margin-top: 0.35em;
+      font-weight: 600;
+      color: rgba(20, 20, 19, 0.62);
+    }
+
+    .pricing-sub {
+      margin: 8px 0 0;
+      color: rgba(20, 20, 19, 0.6);
+      font-size: 14px;
+      line-height: 1.4;
+    }
+
+    .pricing-features {
+      list-style: none;
+      padding: 18px 0 26px;
+      margin: 0 0 auto;
+      border-top: 1px solid rgba(20, 20, 19, 0.08);
+    }
+
+    .pricing-features li {
+      position: relative;
+      padding: 7px 0 7px 26px;
+      color: rgba(20, 20, 19, 0.78);
+      font-size: 15.5px;
+      line-height: 1.45;
+    }
+
+    /* purple diamond bullet (rotated square) */
+    .pricing-features li::before {
+      content: "";
+      position: absolute;
+      left: 4px;
+      top: 14px;
+      width: 9px;
+      height: 9px;
+      background: var(--amethyst);
+      transform: rotate(45deg);
+      border-radius: 2px;
+      box-shadow: 0 2px 6px rgba(124, 58, 237, 0.35);
+    }
+
+    .pricing-card .pricing-cta {
+      width: 100%;
+      margin-top: 0;
+      text-align: center;
+    }
+
+    @media (max-width: 760px) {
+      .pricing-grid {
+        grid-template-columns: 1fr;
+        gap: 36px;
+        margin-top: 32px;
+      }
+      .pricing-card { padding: 30px 24px; }
+    }
+
     .price-box {
       border-color: rgba(255,255,255,0.18);
       background:
@@ -3762,11 +3902,39 @@
         <p><strong>This price only exists for this launch, and there are only 40 seats.</strong></p>
       </div>
     </div>
-    <div class="price-box">
-      <span class="price-tag">Claude Marketing MBA</span>
-      <div class="price">$997</div>
-      <div class="price-note">One-time payment &middot; 4 weeks live &middot; 40 founding seats</div>
-      <a href="https://aisolopreneur.thrivecart.com/claude-marketing-mba/" class="btn btn-primary btn-large">Join the cohort</a>
+    <div class="pricing-grid">
+      <article class="pricing-card">
+        <div class="pricing-head">
+          <span class="pricing-tag">Cohort</span>
+          <div class="pricing-amount"><span class="pricing-currency">$</span>997</div>
+          <p class="pricing-sub">One-time payment &middot; 4 weeks live &middot; 40 founding seats</p>
+        </div>
+        <ul class="pricing-features">
+          <li>4 × 1-hour live calls with Ole</li>
+          <li>Weekly live Q&amp;A / office hours</li>
+          <li>Skool community access</li>
+          <li>Claude Marketing Skills (full library)</li>
+        </ul>
+        <a href="https://aisolopreneur.thrivecart.com/claude-marketing-mba/" class="btn btn-primary btn-large pricing-cta">Join the cohort</a>
+      </article>
+
+      <article class="pricing-card pricing-card-featured">
+        <span class="pricing-badge">Most personal</span>
+        <div class="pricing-head">
+          <span class="pricing-tag">Cohort + 1:1</span>
+          <div class="pricing-amount"><span class="pricing-currency">$</span>4,997</div>
+          <p class="pricing-sub">Everything in Cohort, plus private coaching</p>
+        </div>
+        <ul class="pricing-features">
+          <li>Everything in the Cohort tier</li>
+          <li>Biweekly 1-hour 1:1 with Ole</li>
+          <li>GTM strategy</li>
+          <li>Content feedback</li>
+          <li>Private tutoring</li>
+          <li>Priority access between sessions</li>
+        </ul>
+        <a href="https://aisolopreneur.thrivecart.com/claude-marketing-mba/" class="btn btn-primary btn-large pricing-cta">Get private access</a>
+      </article>
     </div>
   </div>
 </section>
